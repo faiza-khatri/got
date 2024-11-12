@@ -13,8 +13,8 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(oopGame src/main.cpp)
-target_link_libraries(oopGame PRIVATE sfml-graphics)
+add_executable(oopGame src/main.cpp "src/baseWindow.h")
+target_link_libraries(oopGame PRIVATE sfml-graphics sfml-window sfml-audio)
 target_compile_features(oopGame PRIVATE cxx_std_17)
 
 if(WIN32)
