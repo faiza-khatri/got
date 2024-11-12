@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 int main()
 {
@@ -16,6 +17,15 @@ int main()
 
     // Set initial position of the ball
     ball.setPosition(ballPosition);
+
+    sf::Texture texture;
+    if (!texture.loadFromFile("D:\\oop\\clonedTemplateOOP\\pngImages\\pngwing.com.png")) {
+        std::cerr << "Error loading image file" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite sprite;
+    sprite.setTexture(texture);
 
     // Main game loop
     while (window.isOpen())
@@ -46,6 +56,7 @@ int main()
         // Clear the window, draw the ball, and display the updated content
         window.clear();
         window.draw(ball);
+        window.draw(sprite);
         window.display();
     }
 
