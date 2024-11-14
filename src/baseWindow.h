@@ -14,13 +14,13 @@
 // Abstract class representing all windows of the game
 // inherits from RenderWinow, adds extra features
 
-class BaseWindow : public sf::RenderWindow {
+class BaseWindow {
 public:
 	// pure virtual function to load textures
 	virtual void loadTextures() = 0;
 
 	// returns the texture given filename of the texture
-	sf::Texture& getTexture(std::string const&);
+	sf::Texture& getTextures(std::string const&);
 
 	// getters
 	sf::Sprite& getBgSprite();
@@ -31,6 +31,7 @@ public:
 	void setBgSprite(const sf::Sprite&);
 	void setFont(const sf::Font&);
 	void setTextures(const std::map<std::string, sf::Texture>&);
+	void setTextureElement(const std::string&, const sf::Texture&);
 
 private:
 	sf::Sprite bgSprite;

@@ -1,6 +1,6 @@
 #include "baseWindow.h"
 
-sf::Texture& BaseWindow::getTexture(std::string const& fileName) {
+sf::Texture& BaseWindow::getTextures(std::string const& fileName) {
 	return textures[fileName];
 }
 
@@ -15,6 +15,10 @@ void BaseWindow::setFont(const sf::Font& newFont) {
 
 void BaseWindow::setTextures(const std::map<std::string, sf::Texture>& newTextures) {
     textures = newTextures;
+}
+
+void BaseWindow::setTextureElement(const std::string& fileName, const sf::Texture& texture) {
+	textures[fileName] = texture;
 }
 
 // getters
