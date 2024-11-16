@@ -35,6 +35,7 @@ void CharacterSelectWindow::initialize() {
 
     // populate textures map
     loadTextures();
+    // opulates characterlist
     for (const auto& [filename, texture] : getTextures()) {
         if (filename.find("Portrait") != std::string::npos) {
             sf::Sprite sprite;
