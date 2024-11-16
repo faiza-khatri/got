@@ -20,14 +20,20 @@ private:
 	sf::Sprite selectedCharacterSprite; // Full image of the selected character
 	sf::Text characterDetailsText;      // Text to show character details
 	sf::RectangleShape selectButton;    // Button for final selection
+	int PORTRAIT_WIDTH;
+	int PORTRAIT_HEIGHT;
+	int INTRO_WIDTH;
+	int INTRO_HEIGHT;
 	bool isCharacterSelected = false;   // Tracks whether a character is selected
 	/*std::map<int, sf::Sprite> characterList;*/
 	sf::Text gameNameText;
 	sf::Text gameNameTestBg;
 	std::map<int, sf::Sprite> characterList;
+	std::map<int, sf::Sprite> character;
+	sf::RectangleShape bgCharacters;
 
 public:
-	CharacterSelectWindow() : BaseWindow(), RenderWindow() {};
+	CharacterSelectWindow();
 	~CharacterSelectWindow();
 
 	// populates textures with character introduction pngs
@@ -41,8 +47,8 @@ public:
 	// Handle mouse and keyboard input
 	void handleInput(); 
 
-	// Draw the selected character details
-	void drawDetails(); 
+	//// Draw the selected character details
+	//void drawDetails(); 
 
 
 };

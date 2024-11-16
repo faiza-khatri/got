@@ -8,8 +8,6 @@ int main() {
     // Set the window size and title
     characterSelectWindow.create(sf::VideoMode(800, 600), "Character Select");
 
-    // Initialize the character list with portraits
-    characterSelectWindow.initialize();
 
     // Main loop
     while (characterSelectWindow.isOpen()) {
@@ -21,6 +19,7 @@ int main() {
         }
 
        // Clear and draw the characters in the window
+       characterSelectWindow.handleInput();
         characterSelectWindow.updateGraphics();
 
     }
