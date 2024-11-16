@@ -10,12 +10,17 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/Window/Mouse.hpp>
+
 
 // character selection window and other initial operations
 class CharacterSelectWindow : public BaseWindow, public sf::RenderWindow {
 private:
 	unsigned int selectedPlayerId;
-	unsigned int numCharacters;
+	sf::Sprite selectedCharacterSprite; // Full image of the selected character
+	sf::Text characterDetailsText;      // Text to show character details
+	sf::RectangleShape selectButton;    // Button for final selection
+	bool isCharacterSelected = false;   // Tracks whether a character is selected
 	/*std::map<int, sf::Sprite> characterList;*/
 	sf::Text gameNameText;
 	sf::Text gameNameTestBg;
@@ -28,10 +33,16 @@ public:
 	// populates textures with character introduction pngs
 	void loadTextures() override;
 
-	// populate characterList with sprites
-	void initialize();
+	//// populate characterList with sprites
+	//void initialize();
 
 	void updateGraphics();
+
+	// Handle mouse and keyboard input
+	void handleInput(); 
+
+	// Draw the selected character details
+	void drawDetails(); 
 
 
 };

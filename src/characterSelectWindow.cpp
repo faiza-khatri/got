@@ -28,7 +28,7 @@ void CharacterSelectWindow::loadTextures() {
 
 }
 
-void CharacterSelectWindow::initialize() {
+CharacterSelectWindow::CharacterSelectWindow() {
     const int PORTRAIT_WIDTH = 80;
     const int PORTRAIT_HEIGHT = 100;
     int characterId = 0;
@@ -45,10 +45,23 @@ void CharacterSelectWindow::initialize() {
             float scaleY = static_cast<float>(PORTRAIT_HEIGHT) / texture.getSize().y;
             sprite.setScale(scaleX, scaleY);
 
+            sprite.setPosition((characterId % 5) * (PORTRAIT_WIDTH + 10) + 50,
+                (characterId / 5) * (PORTRAIT_HEIGHT + 10) + 50);
+
             characterList[characterId++] = sprite;
             std::cout << "Added sprite: " << characterId << std::endl;
         }
     }
+
+    // Configure select button
+    selectButton.setSize({ 150.0f, 50.0f });
+    selectButton.setFillColor(sf::Color::Blue);
+    selectButton.setPosition(600, 400);
+
+    characterDetailsText.setFont(getFont());
+    characterDetailsText.setCharacterSize(20);
+    characterDetailsText.setFillColor(sf::Color::White);
+    characterDetailsText.setPosition(50, 300);
 
 }
 
