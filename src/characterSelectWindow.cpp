@@ -6,7 +6,8 @@
 #include <string>
 
 void CharacterSelectWindow::loadTextures() {
-	std::string folderPath = "D:\\oop\\clonedTemplateOOP\\pngImages\\characterIntroPortraits";
+    std::string folderPath = std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\characterIntroPortraits";
+	/*std::string folderPath = "D:\\oop\\clonedTemplateOOP\\pngImages\\characterIntroPortraits";*/
     for(int j = 0; j<2; j++)
     {
         int i = 0;
@@ -27,7 +28,7 @@ void CharacterSelectWindow::loadTextures() {
         catch (const std::exception& e) {
             std::cerr << "Error accessing directory: " << e.what() << std::endl;
         }
-     folderPath = "D:\\oop\\clonedTemplateOOP\\pngImages\\characterIntros";
+     folderPath = std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() +"\\pngImages\\characterIntros";
 
     }
     

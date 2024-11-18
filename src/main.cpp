@@ -1,9 +1,14 @@
 #include <SFML/Graphics.hpp>
 #include "characterSelectWindow.h"
 
+#include <iostream>
+#include <filesystem>
+
 int main() {
     // Create an instance of CharacterSelectWindow
     CharacterSelectWindow characterSelectWindow;
+
+    std::cout << "Current working directory: " << std::filesystem::current_path() << std::endl;
 
     // Set the window size and title
     characterSelectWindow.create(sf::VideoMode(800, 600), "Character Select");

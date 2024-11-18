@@ -13,7 +13,7 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(oopGame "src/main4.cpp" "src/baseWindow.h" "src/baseWindow.cpp" "src/characterSelectWindow.h" "src/characterSelectWindow.cpp" "src/character.h" "src/character.cpp" "src/player.h" "src/player.cpp" )
+add_executable(oopGame "src/main.cpp" "src/baseWindow.h" "src/baseWindow.cpp" "src/characterSelectWindow.h" "src/characterSelectWindow.cpp" "src/character.h" "src/character.cpp" "src/player.h" "src/player.cpp" )
 target_link_libraries(oopGame PRIVATE sfml-graphics sfml-window sfml-audio)
 target_compile_features(oopGame PRIVATE cxx_std_17)
 
