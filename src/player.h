@@ -12,7 +12,7 @@ public:
 	/*void attack() override;
 	void defend() override;*/
 	/*void loadCharVarTextures() override;*/
-	void handleInput() override;
+	void changeState() override;
 };
 
 

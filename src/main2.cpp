@@ -24,7 +24,7 @@ int main() {
             }
         }
         
-        player.handleInput();
+        player.changeState();
         /*std::cout << player.getState() << std::endl;*/
 
         player.animate(false);

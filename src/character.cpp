@@ -3,8 +3,8 @@
 #include <filesystem>
 #include <iostream>
 
-void Character::loadCharVarTextures() {
-	std::string folderPath = "D:\\oop\\clonedTemplateOOP\\pngImages\\player";
+void Character::loadCharVarTextures(std::string& folderPath) {
+	
 	try {
 		std::map<std::string, std::array<sf::Texture, 3>> map;
 

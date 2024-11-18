@@ -14,7 +14,7 @@
 
 
 // character selection window and other initial operations
-class CharacterSelectWindow : public BaseWindow, public sf::RenderWindow {
+class CharacterSelectWindow : public BaseWindow {
 private:
 	unsigned int selectedPlayerId;
 	sf::Sprite selectedCharacterSprite; // Full image of the selected character

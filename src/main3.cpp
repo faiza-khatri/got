@@ -18,15 +18,17 @@ int main() {
     attackSprite.setTexture(attackTexture);
 
     // Define the frame size (based on your sprite sheet's dimensions)
-    const int frameWidth = 86;  // Width of a single frame
-    const int frameHeight = 86; // Height of a single frame
-    const int numFrames = 5;    // Total number of frames in the animation
+    const int frameWidth = 96;  // Width of a single frame
+    const int frameHeight = 80; // Height of a single frame
+    const int numFrames = 8;    // Total number of frames in the animation
     const float frameDuration = 0.15f; // Time per frame in seconds
 
     // Set the initial frame
     int currentFrame = 0;
     attackSprite.setTextureRect(sf::IntRect(0, 0, frameWidth, frameHeight));
     attackSprite.setPosition(350.0f, 250.0f); // Center the sprite in the window
+    attackSprite.setScale(-2.0f, 2.0f); // Center the sprite in the window
+
 
     // Animation timer
     sf::Clock clock;
