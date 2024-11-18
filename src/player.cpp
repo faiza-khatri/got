@@ -27,19 +27,27 @@ Player::Player(int hlth, int spd, int attackPwr, std::string nme) {
 	int frameWidth, frameHeight;
 	int numFrames;
 
-	if (chrPlayer == "jonsnow" || chrPlayer == "brienne") {
-		frameWidth = 290 / 4;
-		frameHeight = 86;
+	if (chrPlayer == "jonsnow") {
+		frameWidth = 96;
+		frameHeight = 84;
+		player.setScale(8.0f, 8.0f);
+		
+	}
+	else if (chrPlayer == "brienne") {
+		frameWidth = 64;
+		frameHeight = 80;
+		player.setScale(8.0f, 8.0f);
 	}
 	else {
 		frameWidth = 100;
 		frameHeight = 60;
+		player.setScale(5.0f, 5.0f);
 	}
 
 	player.setTextureRect(sf::IntRect(0, 0, frameWidth, frameHeight));
 
-	player.setPosition(400.0f, 500.0f);
-	player.setScale(5.0f, 5.0f);
+	player.setPosition(400.0f, 100.0f);
+	
 	setSprite(player);
 
 
