@@ -1,5 +1,6 @@
 #include "startScreen.h"
 #include <iostream>
+#include "characterSelectWindow.h"
 
 StartScreen::StartScreen() {
 }
@@ -41,8 +42,7 @@ void StartScreen::updateButtonPositions(sf::Vector2u windowSize, sf::Sprite& pla
 
     playButton.setPosition(playButtonX, buttonY - (buttonHeight / 2.0f));
     exitButton.setPosition(exitButtonX, buttonY - (buttonHeight / 2.0f));
-
-    // Position the Change Background button below the others
+    //bg change button 
     float cbButtonX = (windowSize.x / 2.0f) - (cbButtonWidth / 2.0f);
     float cbButtonY = buttonY + buttonHeight + (windowSize.y * 0.05f);
     cbButton.setPosition(cbButtonX, cbButtonY);
@@ -57,11 +57,13 @@ void StartScreen::setupScreen(sf::RenderWindow& window) {
     sf::Sprite changeBgButton(getTextures("change_bg"));
 
     updateButtonPositions(window.getSize(), playButton, exitButton, changeBgButton);
+
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed) {
                 window.close();
+            }
 
             if (event.type == sf::Event::Resized) {
                 sf::Vector2u newSize(event.size.width, event.size.height);
@@ -74,6 +76,15 @@ void StartScreen::setupScreen(sf::RenderWindow& window) {
 
                     if (playButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
                         std::cout << "Play button clicked. Starting the game!" << std::endl;
+                        window.close();  // close current window
+
+                        // open CharacterSelectWindow
+                        CharacterSelectWindow characterSelectWindow;
+                        characterSelectWindow.create(sf::VideoMode(800, 600), "Character Select");
+                        while (characterSelectWindow.isOpen()) {
+                            characterSelectWindow.handleInput();
+                            characterSelectWindow.updateGraphics();
+                        }
                     }
                     if (exitButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
                         std::cout << "Exit button clicked. Exiting the game!" << std::endl;
@@ -82,6 +93,7 @@ void StartScreen::setupScreen(sf::RenderWindow& window) {
                     if (changeBgButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
                         std::cout << "Change Background button clicked. Changing the background!" << std::endl;
                     }
+                    //here background change logiccxxx
                 }
             }
         }
@@ -94,3 +106,4 @@ void StartScreen::setupScreen(sf::RenderWindow& window) {
         window.display();
     }
 }
+
