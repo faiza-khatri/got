@@ -50,19 +50,33 @@ void Character::animate(bool flip) {
 
 	int frameWidth, frameHeight, numFrames;
 
-	if (selectedCharacter == "jonsnow" || selectedCharacter == "brienne") {
-		frameHeight = 86;
+	if (selectedCharacter == "jonsnow") {
+		frameHeight = 84;
 		if (state==0) {
-			frameWidth = 290 / 4;
-			numFrames = 4;
+			frameWidth = 96;
+			numFrames = 7;
 		}
 		else if (state==-1) {
-			frameWidth = 80;
-			numFrames = 5;
+			frameWidth = 96;
+			numFrames = 6;
 		}
 		else {
-			frameWidth = 86;
-			numFrames = 5;
+			frameWidth = 96;
+			numFrames = 6;
+		}
+	} else if (selectedCharacter == "brienne") {
+		frameHeight = 80;
+		if (state == 0) {
+			frameWidth = 64;
+			numFrames = 4;
+		}
+		else if (state == -1) {
+			frameWidth = 64;
+			numFrames = 4;
+		}
+		else {
+			frameWidth = 96;
+			numFrames = 8;
 		}
 	}
 	else {
