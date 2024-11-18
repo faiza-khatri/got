@@ -34,7 +34,7 @@ void CharacterSelectWindow::loadTextures() {
     
 }
 
-CharacterSelectWindow::CharacterSelectWindow() : BaseWindow(), RenderWindow() {
+CharacterSelectWindow::CharacterSelectWindow() : BaseWindow(){
     INTRO_WIDTH = 180;
     INTRO_HEIGHT = 300;
     int characterId = 0;

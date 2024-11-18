@@ -16,7 +16,8 @@ Player::Player(int hlth, int spd, int attackPwr, std::string nme) {
 	std::string s = "jonsnow";
 	setSelectedCharacter(s);
 	setCurrentFrame(0);
-	loadCharVarTextures();
+	std::string folderPath = std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\player";
+	loadCharVarTextures(folderPath);
 
 	std::string chrPlayer = getSelectedCharacter();
 
@@ -58,7 +59,7 @@ Player::Player(int hlth, int spd, int attackPwr, std::string nme) {
 
 }
 
-void Player::handleInput() {
+void Player::changeState() {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
 		if (getState() != 1) {
 			setCurrentFrame(0);

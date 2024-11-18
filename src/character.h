@@ -34,11 +34,11 @@ public:
 	/*void attack(bool flip);
 	void defend(bool flip);*/
 	/*void idle(bool flip);*/
-	void virtual handleInput() = 0; // calls attack, defend etc
+	void virtual changeState() = 0; // calls attack, defend etc
 	void move(int); // -1 for left, 1 for right
 	void animate(bool flip);
 	/*void updateState(bool);*/
-	void loadCharVarTextures();
+	void loadCharVarTextures(std::string&);
 	void drawChar(sf::RenderWindow& window);
 
 	std::string& getName();
