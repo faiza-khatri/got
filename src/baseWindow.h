@@ -11,16 +11,22 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 
+#include "game.h"
+
 // Abstract class representing all windows of the game
 // inherits from RenderWinow, adds extra features
 
 class BaseWindow {
 public:
 	// pure virtual function to load textures
-	virtual void loadTextures() = 0;
+	void loadTextures(std::string&);
+
+	virtual void initializeComponents(sf::Vector2u&) = 0;
+
+	virtual void renderScreen(sf::RenderWindow&) = 0;         
 
 	// returns the texture given filename of the texture
-	sf::Texture& getTextures(std::string const&);
+	sf::Texture& getTextures(std::string&);
 
 	// getters
 	sf::Sprite& getBgSprite();

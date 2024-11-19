@@ -13,7 +13,7 @@ Player::Player(int hlth, int spd, int attackPwr, std::string nme) {
 	setAttackPower(attackPwr);
 	setSprite(player);
 	setName(nme);
-	std::string s = "jonsnow";
+	std::string s = "danaerys";
 	setSelectedCharacter(s);
 	setCurrentFrame(0);
 	std::string folderPath = std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\player";
@@ -47,7 +47,7 @@ Player::Player(int hlth, int spd, int attackPwr, std::string nme) {
 
 	player.setTextureRect(sf::IntRect(0, 0, frameWidth, frameHeight));
 
-	player.setPosition(400.0f, 100.0f);
+	player.setPosition(60.0f, 100.0f);
 	
 	setSprite(player);
 
@@ -57,6 +57,60 @@ Player::Player(int hlth, int spd, int attackPwr, std::string nme) {
 	setAnimationClock(clk);
 	setElapsedTime(0.0f);
 
+}
+
+Player::Player() {
+	sf::Sprite player;
+	setState(0); // defaut is idle
+	setHealth(100);
+	setSpeed(50);
+	setAttackPower(100);
+	setSprite(player);
+	std::string name = "john";
+	setName(name);
+	std::string s = "jonsnow";
+	setSelectedCharacter(s);
+	setCurrentFrame(0);
+	std::string folderPath = std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\player";
+	loadCharVarTextures(folderPath);
+
+	std::string chrPlayer = getSelectedCharacter();
+
+	setCharTexture(getCharVar()[chrPlayer][2]);
+
+	player.setTexture(getCharTexture());
+
+	int frameWidth, frameHeight;
+	int numFrames;
+
+	if (chrPlayer == "jonsnow") {
+		frameWidth = 96;
+		frameHeight = 84;
+		player.setScale(8.0f, 8.0f);
+
+	}
+	else if (chrPlayer == "brienne") {
+		frameWidth = 64;
+		frameHeight = 80;
+		player.setScale(8.0f, 8.0f);
+	}
+	else {
+		frameWidth = 100;
+		frameHeight = 60;
+		player.setScale(5.0f, 5.0f);
+	}
+
+	player.setTextureRect(sf::IntRect(0, 0, frameWidth, frameHeight));
+
+	player.setPosition(200.0f, 100.0f);
+
+	setSprite(player);
+
+
+	sf::Clock clk;
+
+	setAnimationClock(clk);
+	setElapsedTime(0.0f);
 }
 
 void Player::changeState() {

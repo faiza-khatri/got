@@ -13,10 +13,20 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Window/Mouse.hpp>
 
+#include "player.h"
+#include "game.h"
+
 
 // character selection window and other initial operations
-class fightWindow : public BaseWindow, public sf::RenderWindow {
-
+class FightWindow : public BaseWindow, public sf::RenderWindow {
+public:
+    FightWindow(sf::Vector2u&, Game& game);
+    void initializeComponents(sf::Vector2u&) override;
+    void renderScreen(sf::RenderWindow& window) override;
+    void handleInput(sf::RenderWindow&, Game& game);
+    ~FightWindow();
+private:
+    Player* p1;
 };
 
 #endif

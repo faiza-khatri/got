@@ -3,6 +3,7 @@
 
 #include "baseWindow.h"
 
+
 #include <string>
 #include <map>
 
@@ -33,19 +34,20 @@ private:
 	sf::RectangleShape bgCharacters;
 
 public:
-	CharacterSelectWindow();
+	CharacterSelectWindow(sf::Vector2u& windowSize);
 	~CharacterSelectWindow();
 
 	// populates textures with character introduction pngs
-	void loadTextures() override;
+	void initializeComponents(sf::Vector2u&) override;
+	void renderScreen(sf::RenderWindow&) override;
 
 	//// populate characterList with sprites
 	//void initialize();
 
-	void updateGraphics();
+	/*void updateGraphics();*/
 
 	// Handle mouse and keyboard input
-	void handleInput(); 
+	void handleInput(sf::RenderWindow&, Game&); 
 
 	//// Draw the selected character details
 	//void drawDetails(); 

@@ -7,6 +7,7 @@
 
 class Player : public Character {
 public:
+	Player();
 	Player(int hlth, int spd, int attackPwr, std::string nme);
 
 	/*void attack() override;
