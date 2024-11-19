@@ -1,6 +1,35 @@
 #include "baseWindow.h"
 
-sf::Texture& BaseWindow::getTextures(std::string const& fileName) {
+#include <filesystem>
+#include <iostream>
+
+void BaseWindow::loadTextures(std::string& folderPath) {
+
+    /*std::string folderPath = "D:\\oop\\clonedTemplateOOP\\pngImages\\characterIntroPortraits";*/
+    /*for (int j = 0; j < 2; j++)
+    {*/
+        int i = 0;
+        try {
+            for (const auto& entry : std::filesystem::directory_iterator(folderPath)) {
+                if (entry.is_regular_file() && entry.path().extension() == ".png") {
+                    sf::Texture texture;
+                    if (texture.loadFromFile(entry.path().string())) {
+                        setTextureElement(entry.path().filename().string(), texture);
+                        std::cout << "Loaded texture: " << entry.path().filename().string() << std::endl;
+                    }
+                    else {
+                        std::cerr << "Failed to load texture: " << entry.path().filename().string() << std::endl;
+                    }
+                }
+            }
+        }
+        catch (const std::exception& e) {
+            std::cerr << "Error accessing directory: " << e.what() << std::endl;
+        }
+
+}
+
+sf::Texture& BaseWindow::getTextures(std::string& fileName) {
 	return textures[fileName];
 }
 

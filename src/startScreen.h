@@ -7,12 +7,17 @@
 
 class StartScreen : public BaseWindow {
 public:
-    StartScreen();
-    void loadTextures() override;
-    void setupScreen(sf::RenderWindow& window);
+    StartScreen(sf::Vector2u& windowSize);
+    void initializeComponents(sf::Vector2u&) override;
+    void renderScreen(sf::RenderWindow& window) override;
+    void handleInput(sf::RenderWindow&, Game& game);
 
 private:
-    void updateButtonPositions(sf::Vector2u windowSize, sf::Sprite& playButton, sf::Sprite& exitButton, sf::Sprite& cbButton);
+    sf::Sprite playButton;
+    sf::Sprite exitButton;
+    sf::Sprite changeBgButton;
+    std::map<int, sf::Sprite> spriteList;
+    /*void updateButtonPositions(sf::Vector2u windowSize);*/
 };
 
 #endif
