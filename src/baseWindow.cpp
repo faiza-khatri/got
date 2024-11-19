@@ -1,5 +1,4 @@
 #include "baseWindow.h"
-
 sf::Texture& BaseWindow::getTextures(std::string const& fileName) {
 	return textures[fileName];
 }
