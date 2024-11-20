@@ -22,13 +22,13 @@ void StartScreen::initializeComponents(sf::Vector2u& windowSize) {
     float buttonWidthFactor = 0.3f;
     float buttonWidth = windowSize.x * buttonWidthFactor;
 
-    sf::Texture change_bg = getTextures()["change_bg.png"];
+    sf::Texture change_bg = getTextures()["changebg.png"];
 
-    getBgSprite().setTexture(getTextures()["background.png"]);
-    
+    getBgSprite().setTexture(getTextures()["bg.png"]);
     playButton.setTexture(getTextures()["play.png"]);
     exitButton.setTexture(getTextures()["exit.png"]);
-    changeBgButton.setTexture(change_bg);
+    changeBgButton.setTexture(getTextures()["changebg.png"]);
+   /* changeBgButton.setTexture(change_bg);*/
 
     float buttonHeight = buttonWidth * (getTextures()["play.png"].getSize().y / static_cast<float>(getTextures()["play.png"].getSize().x));
     playButton.setScale(buttonWidth / getTextures()["play.png"].getSize().x, buttonHeight / getTextures()["play.png"].getSize().y);
@@ -68,12 +68,7 @@ void StartScreen::handleInput(sf::RenderWindow& wind, Game& game) {
                 wind.close();
             }
         }
-        /*else if (changeBgButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
-            if (game.getCurrentState() != 1) {
-                game.setCurrentState(1);
-            }
-        }*/
-        ////////////// to be implemented when background is here
+        ////////////// ADD HERE THE LOGIC OF CHANGE BACKGROUND THE STATE CHANGES TO 2 /////////////////////////
     }
 }
 
