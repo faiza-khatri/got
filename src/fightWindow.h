@@ -14,19 +14,22 @@
 #include <SFML/Window/Mouse.hpp>
 
 #include "player.h"
-#include "game.h"
+//#include "game.h"
 
 
 // character selection window and other initial operations
 class FightWindow : public BaseWindow, public sf::RenderWindow {
 public:
-    FightWindow(sf::Vector2u&, Game& game);
-    void initializeComponents(sf::Vector2u&) override;
+    /*FightWindow();*/
+    FightWindow(sf::Vector2u&);
+    void initializeComponents(sf::Vector2u&, int) override;
     void renderScreen(sf::RenderWindow& window) override;
-    void handleInput(sf::RenderWindow&, Game& game);
+    int handleInput(sf::RenderWindow&);
+    void operator=(const FightWindow*);
     ~FightWindow();
 private:
     Player* p1;
+    
 };
 
 #endif

@@ -5,15 +5,22 @@
 #include <SFML/Window/Keyboard.hpp> 
 
 
-Player::Player(int hlth, int spd, int attackPwr, std::string nme) {
+Player::Player(int hlth, int spd, int attackPwr, std::string nm, int pl) {
 	sf::Sprite player;
 	setState(0); // defaut is idle
 	setHealth(hlth);
 	setSpeed(spd);
 	setAttackPower(attackPwr);
 	setSprite(player);
-	setName(nme);
+	setName(nm);
 	std::string s = "danaerys";
+	if (pl == 0) {
+		s = "jonsnow";
+	}
+	else if (pl == 2) {
+		s = "brienne";
+	}
+	
 	setSelectedCharacter(s);
 	setCurrentFrame(0);
 	std::string folderPath = std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\player";
@@ -130,6 +137,7 @@ void Player::changeState() {
 			setState(-1);
 		}
 	}
+
 	/*else {
 		if (getState() != 0) {
 			setState(0);

@@ -1,25 +1,26 @@
 #include <SFML/Graphics.hpp>
-#include "characterSelectWindow.h"
-#include "startScreen.h"
-#include "fightWindow.h"
+//#include "characterSelectWindow.h"
+//#include "startScreen.h"
+//#include "fightWindow.h"
+
+#include "game.h"
 
 #include <iostream>
 #include <filesystem>
 
 int main() {
-    Game game;
-    // Create an instance of CharacterSelectWindow
-    sf::Vector2u windowSize = { 800, 600 };
-    CharacterSelectWindow characterSelectWindow(windowSize);
-    StartScreen startScreen(windowSize);
-    FightWindow fightWindow(windowSize, game);
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Character select test");
-    
-
-    std::cout << "Current working directory: " << std::filesystem::current_path() << std::endl;
+    //Game game;
+    //// Create an instance of CharacterSelectWindow
+    //sf::Vector2u windowSize = { 800, 600 };
+    //CharacterSelectWindow characterSelectWindow(windowSize);
+    //StartScreen startScreen(windowSize);
+    //FightWindow fightWindow(windowSize, game);
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Game");
 
     // Set the window size and title
-    window.create(sf::VideoMode(800, 600), "Character Select");
+    window.create(sf::VideoMode(800, 600), "Game");
+
+    Game game(window.getSize());
 
 
     // Main loop
@@ -29,28 +30,12 @@ int main() {
             if (event.type == sf::Event::Closed) {
               window.close();
           }
-            if (game.getCurrentState() == 0) {
-                startScreen.handleInput(window, game);
-            }
-            else if (game.getCurrentState() == 1) {
-                characterSelectWindow.handleInput(window, game);
-            }
-            else if (game.getCurrentState() == 2) {
-                fightWindow.handleInput(window, game);
-            }
+            game.handleInput(window);
         }
 
        
        window.clear(sf::Color::Black);
-       if (game.getCurrentState() == 0) {
-           startScreen.renderScreen(window);
-       }
-       else if (game.getCurrentState() == 1) {
-           characterSelectWindow.renderScreen(window);
-       }
-       else if (game.getCurrentState() == 2) {
-           fightWindow.renderScreen(window);
-       }
+       game.renderScreen(window);
 
        window.display();
 

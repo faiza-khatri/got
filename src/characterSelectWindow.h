@@ -9,21 +9,37 @@
 #include <string>
 
 class CharacterSelectWindow : public BaseWindow {
-public:
-    CharacterSelectWindow(sf::Vector2u& windowSize);
-    ~CharacterSelectWindow();
-
-    void renderScreen(sf::RenderWindow& wind) override;
-    void handleInput(sf::RenderWindow&, Game&);
 
 private:
-    void initializeComponents(sf::Vector2u& windowSize);
+	sf::Sprite selectedCharacterSprite; // Full image of the selected character
+	sf::Text characterDetailsText;      // Text to show character details
+	sf::RectangleShape selectButton;    // Button for final selection
+	int PORTRAIT_WIDTH;
+	int PORTRAIT_HEIGHT;
+	int INTRO_WIDTH;
+	int INTRO_HEIGHT;
+	bool isCharacterSelected = false;   // Tracks whether a character is selected
+	/*std::map<int, sf::Sprite> characterList;*/
+	sf::Text gameNameText;
+	sf::Text gameNameTestBg;
+	std::map<int, sf::Sprite> characterList;
+	std::map<int, sf::Sprite> character;
+	sf::RectangleShape bgCharacters;
 
-    std::map<int, sf::Sprite> characterList; 
-    std::map<int, sf::Sprite> character;     
+public:
+	/*CharacterSelectWindow();*/
+	CharacterSelectWindow(sf::Vector2u& windowSize);
+	~CharacterSelectWindow();
+	void operator=(const CharacterSelectWindow*);
 
-    int selectedPlayerId;
-    bool isCharacterSelected = false;
+	// populates textures with character introduction pngs
+	void initializeComponents(sf::Vector2u&, int) override;
+	void renderScreen(sf::RenderWindow&) override;
+
+
+	// Handle mouse and keyboard input
+	int handleInput(sf::RenderWindow&) override; 
+
 
     sf::Sprite selectedCharacterSprite;   
     sf::Text characterDetailsText;       

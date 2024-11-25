@@ -9,10 +9,12 @@
 
 class StartScreen : public BaseWindow {
 public:
+    /*StartScreen();*/
     StartScreen(sf::Vector2u& windowSize);
-    void initializeComponents(sf::Vector2u&) override;
+    void initializeComponents(sf::Vector2u&, int) override;
     void renderScreen(sf::RenderWindow& window) override;
-    void handleInput(sf::RenderWindow&, Game& game);
+    int handleInput(sf::RenderWindow&) override;
+    void operator=(const StartScreen*);
 
 private:
     // UI elements
@@ -26,6 +28,7 @@ private:
     sf::Sound clickSound;              
     sf::Music backgroundMusic;         
     void loadAudio(); 
+
 };
 
 #endif

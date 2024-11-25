@@ -26,8 +26,9 @@ void BaseWindow::loadTextures(std::string& folderPath) {
         catch (const std::exception& e) {
             std::cerr << "Error accessing directory: " << e.what() << std::endl;
         }
-
 }
+
+
 
 sf::Texture& BaseWindow::getTextures(std::string& fileName) {
 	return textures[fileName];
@@ -61,4 +62,19 @@ sf::Font& BaseWindow::getFont() {
 
 std::map<std::string, sf::Texture>& BaseWindow::getTextures() {
 	return textures;
+}
+
+bool BaseWindow::getActiveStatus() {
+    return active;
+}
+
+void BaseWindow::changeActiveStatus(bool act) {
+    active = act;
+}
+
+void BaseWindow::setSelectedPlayerId( int pl) {
+    selectedPlayerId = pl;
+}
+ int BaseWindow::getSelectedPlayerId() {
+    return selectedPlayerId;
 }
