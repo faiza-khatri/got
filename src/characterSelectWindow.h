@@ -1,23 +1,16 @@
-#ifndef CHARACTER_SELECT_WINDOW
-#define CHARACTER_SELECT_WINDOW
+#ifndef CHARACTERSELECTWINDOW_H
+#define CHARACTERSELECTWINDOW_H
 
 #include "baseWindow.h"
-
-
-#include <string>
+#include "game.h"
+#include <SFML/Audio.hpp>
+#include <SFML/Graphics.hpp>
 #include <map>
+#include <string>
 
-#include <SFML/Graphics/Text.hpp>
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Graphics/Sprite.hpp>
-#include <SFML/Graphics/RectangleShape.hpp>
-#include <SFML/Window/Mouse.hpp>
-
-
-// character selection window and other initial operations
 class CharacterSelectWindow : public BaseWindow {
+
 private:
-	/*unsigned int selectedPlayerId;*/
 	sf::Sprite selectedCharacterSprite; // Full image of the selected character
 	sf::Text characterDetailsText;      // Text to show character details
 	sf::RectangleShape selectButton;    // Button for final selection
@@ -43,17 +36,25 @@ public:
 	void initializeComponents(sf::Vector2u&, int) override;
 	void renderScreen(sf::RenderWindow&) override;
 
-	
 
 	// Handle mouse and keyboard input
 	int handleInput(sf::RenderWindow&) override; 
 
-	//// Draw the selected character details
-	//void drawDetails(); 
 
+    sf::Sprite selectedCharacterSprite;   
+    sf::Text characterDetailsText;       
 
+   /* sf::RectangleShape selectButton;    */    
+    sf::Sprite selectButtonSprite;           
+    sf::Texture selectButtonTexture;         
+
+    sf::SoundBuffer clickBuffer;             // click sound
+    sf::Sound clickSound;                    // Click sound
+
+    float INTRO_WIDTH, INTRO_HEIGHT;
+    float PORTRAIT_WIDTH, PORTRAIT_HEIGHT;
+
+    sf::RectangleShape bgCharacters;         
 };
 
-
-
-#endif
+#endif 

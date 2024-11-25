@@ -3,7 +3,9 @@
 
 #include "baseWindow.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp> // For sound and music
 #include <string>
+#include <map>
 
 class StartScreen : public BaseWindow {
 public:
@@ -15,12 +17,18 @@ public:
     void operator=(const StartScreen*);
 
 private:
+    // UI elements
     sf::Sprite playButton;
     sf::Sprite exitButton;
     sf::Sprite changeBgButton;
     std::map<int, sf::Sprite> spriteList;
-  
-    /*void updateButtonPositions(sf::Vector2u windowSize);*/
+
+    // Sound-related members
+    sf::SoundBuffer clickSoundBuffer;   
+    sf::Sound clickSound;              
+    sf::Music backgroundMusic;         
+    void loadAudio(); 
+
 };
 
 #endif

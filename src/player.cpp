@@ -39,7 +39,7 @@ Player::Player(int hlth, int spd, int attackPwr, std::string nm, int pl) {
 		frameWidth = 96;
 		frameHeight = 84;
 		player.setScale(8.0f, 8.0f);
-		
+
 	}
 	else if (chrPlayer == "brienne") {
 		frameWidth = 64;
@@ -55,7 +55,7 @@ Player::Player(int hlth, int spd, int attackPwr, std::string nm, int pl) {
 	player.setTextureRect(sf::IntRect(0, 0, frameWidth, frameHeight));
 
 	player.setPosition(60.0f, 100.0f);
-	
+
 	setSprite(player);
 
 
@@ -127,7 +127,7 @@ void Player::changeState() {
 			setCharTexture(getCharVar()[getSelectedCharacter()][0]);
 			getSprite().setTexture(getCharTexture());
 			setState(1);
-		}		
+		}
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) {
 		if (getState() != -1) {
@@ -135,7 +135,7 @@ void Player::changeState() {
 			setCharTexture(getCharVar()[getSelectedCharacter()][1]);
 			getSprite().setTexture(getCharTexture());
 			setState(-1);
-		}	
+		}
 	}
 
 	/*else {
@@ -143,7 +143,6 @@ void Player::changeState() {
 			setState(0);
 			setCurrentFrame(0);
 		}
-		
+
 	}*/
 }
-
