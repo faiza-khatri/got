@@ -2,17 +2,17 @@
 #include "characterSelectWindow.h"
 #include "startScreen.h"
 #include "fightWindow.h"
-
+#include "GameOverWindow.h"
 #include <iostream>
 #include <filesystem>
 
 int main() {
     Game game;
-    // Create an instance of CharacterSelectWindow
     sf::Vector2u windowSize = { 800, 600 };
     CharacterSelectWindow characterSelectWindow(windowSize);
     StartScreen startScreen(windowSize);
     FightWindow fightWindow(windowSize, game);
+    GameOverWindow gameOverWindow(windowSize);  
     sf::RenderWindow window(sf::VideoMode(800, 600), "Character select test");
     
 
@@ -21,7 +21,7 @@ int main() {
     // Set the window size and title
     window.create(sf::VideoMode(800, 600), "Character Select");
 
-
+    game.setCurrentState(3);
     // Main loop
     while (window.isOpen()) {
        sf::Event event;
@@ -42,6 +42,8 @@ int main() {
 
        
        window.clear(sf::Color::Black);
+
+       // Render based on the current game state
        if (game.getCurrentState() == 0) {
            startScreen.renderScreen(window);
        }
@@ -51,11 +53,12 @@ int main() {
        else if (game.getCurrentState() == 2) {
            fightWindow.renderScreen(window);
        }
+       else if (game.getCurrentState() == 3) {
+           gameOverWindow.renderScreen(window);  // Render the game over screen
+       }
 
        window.display();
-
     }
-
 
     return 0;
 }
