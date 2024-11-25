@@ -8,7 +8,7 @@
 class Player : public Character {
 public:
 	Player();
-	Player(int hlth, int spd, int attackPwr, std::string nme);
+	Player(int hlth, int spd, int attackPwr, std::string nme, int pl);
 
 	/*void attack() override;
 	void defend() override;*/

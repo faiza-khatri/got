@@ -11,8 +11,6 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 
-#include "game.h"
-
 // Abstract class representing all windows of the game
 // inherits from RenderWinow, adds extra features
 
@@ -21,28 +19,40 @@ public:
 	// pure virtual function to load textures
 	void loadTextures(std::string&);
 
-	virtual void initializeComponents(sf::Vector2u&) = 0;
-
+	virtual void initializeComponents(sf::Vector2u&, int playerSelected) = 0;
+	virtual int handleInput(sf::RenderWindow&) = 0;
 	virtual void renderScreen(sf::RenderWindow&) = 0;         
 
 	// returns the texture given filename of the texture
 	sf::Texture& getTextures(std::string&);
 
+	/*virtual void operator=(const BaseWindow*) = 0;*/
+
+	void changeActiveStatus(bool);
+	void setSelectedPlayerId(int);
+	int getSelectedPlayerId();
+
 	// getters
 	sf::Sprite& getBgSprite();
 	sf::Font& getFont();
 	std::map<std::string, sf::Texture>& getTextures();
+	bool getActiveStatus();
+	int selectedPlayerId = 1;
+	
 
 	// setters
 	void setBgSprite(const sf::Sprite&);
 	void setFont(const sf::Font&);
 	void setTextures(const std::map<std::string, sf::Texture>&);
 	void setTextureElement(const std::string&, const sf::Texture&);
+	
+
 
 private:
 	sf::Sprite bgSprite;
 	sf::Font font;
 	std::map<std::string, sf::Texture> textures;
+	bool active = 0;
 
 };
 

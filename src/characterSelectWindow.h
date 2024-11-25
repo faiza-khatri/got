@@ -17,7 +17,7 @@
 // character selection window and other initial operations
 class CharacterSelectWindow : public BaseWindow {
 private:
-	unsigned int selectedPlayerId;
+	/*unsigned int selectedPlayerId;*/
 	sf::Sprite selectedCharacterSprite; // Full image of the selected character
 	sf::Text characterDetailsText;      // Text to show character details
 	sf::RectangleShape selectButton;    // Button for final selection
@@ -34,20 +34,19 @@ private:
 	sf::RectangleShape bgCharacters;
 
 public:
+	/*CharacterSelectWindow();*/
 	CharacterSelectWindow(sf::Vector2u& windowSize);
 	~CharacterSelectWindow();
+	void operator=(const CharacterSelectWindow*);
 
 	// populates textures with character introduction pngs
-	void initializeComponents(sf::Vector2u&) override;
+	void initializeComponents(sf::Vector2u&, int) override;
 	void renderScreen(sf::RenderWindow&) override;
 
-	//// populate characterList with sprites
-	//void initialize();
-
-	/*void updateGraphics();*/
+	
 
 	// Handle mouse and keyboard input
-	void handleInput(sf::RenderWindow&, Game&); 
+	int handleInput(sf::RenderWindow&) override; 
 
 	//// Draw the selected character details
 	//void drawDetails(); 

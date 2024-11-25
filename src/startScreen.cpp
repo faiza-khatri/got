@@ -2,22 +2,16 @@
 #include <iostream>
 #include <filesystem>
 
+
 StartScreen::StartScreen(sf::Vector2u& windowSize) {
     loadTextures(std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\start_scrn");
-    initializeComponents(windowSize);
+    /*initializeComponents(windowSize);*/
+    changeActiveStatus(0);
 }
 
 
-//void StartScreen::updateButtonPositions() {
-//    
-//
-//    sf::Texture play = getTextures()["play.png"];
-//    sf::Texture change_bg = getTextures()["change_bg.png"];
-//
-//    
-//}
 
-void StartScreen::initializeComponents(sf::Vector2u& windowSize) {
+void StartScreen::initializeComponents(sf::Vector2u& windowSize, int playerSelected) {
 
     float buttonWidthFactor = 0.3f;
     float buttonWidth = windowSize.x * buttonWidthFactor;
@@ -54,19 +48,20 @@ void StartScreen::initializeComponents(sf::Vector2u& windowSize) {
     
 }
 
-void StartScreen::handleInput(sf::RenderWindow& wind, Game& game) {
+int StartScreen::handleInput(sf::RenderWindow& wind) {
     sf::Vector2i mousePos = sf::Mouse::getPosition(wind);
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
         if (playButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
-            if (game.getCurrentState() != 1) {
+            /*if (game.getCurrentState() != 1) {
                 game.setCurrentState(1);
-            }
+            }*/
+            return 1;
         }
         else if (exitButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
-            if (game.getCurrentState() != -1) {
+            /*if (game.getCurrentState() != -1) {
                 game.setCurrentState(-1);
                 wind.close();
-            }
+            }*/
         }
         /*else if (changeBgButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
             if (game.getCurrentState() != 1) {
@@ -75,17 +70,10 @@ void StartScreen::handleInput(sf::RenderWindow& wind, Game& game) {
         }*/
         ////////////// to be implemented when background is here
     }
+    return 0;
 }
 
 void StartScreen::renderScreen(sf::RenderWindow& window) {
-    
-    /*updateButtonPositions(window.getSize());*/
-    
-    /*sf::RectangleShape rect(sf::Vector2f(200, 100));
-    rect.setFillColor(sf::Color::Green);
-    rect.setPosition(300, 250);
-
-    window.draw(rect);*/
    
 
 
@@ -94,5 +82,12 @@ void StartScreen::renderScreen(sf::RenderWindow& window) {
     window.draw(exitButton);
     window.draw(changeBgButton);
 
+}
+
+void StartScreen::operator=(const StartScreen* other) {
+    playButton = other->playButton;
+    exitButton = other->exitButton;
+    changeBgButton = other->changeBgButton;
+    spriteList = other->spriteList;
 }
 

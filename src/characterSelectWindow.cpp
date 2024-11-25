@@ -7,7 +7,7 @@
 
 
 
-CharacterSelectWindow::CharacterSelectWindow(sf::Vector2u& windowSize) : BaseWindow(){
+CharacterSelectWindow::CharacterSelectWindow(sf::Vector2u& windowSize) {
     
 
     // populate textures map
@@ -15,18 +15,23 @@ CharacterSelectWindow::CharacterSelectWindow(sf::Vector2u& windowSize) : BaseWin
     loadTextures(std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\characterIntros");
 
     // populates characterlist
-    initializeComponents(windowSize);
+   /* initializeComponents(windowSize);*/
+
+    // set as active by default
+    changeActiveStatus(0); 
+    INTRO_WIDTH = 180;
+    INTRO_HEIGHT = 300;
+    
+    
+    PORTRAIT_WIDTH = 80;
+    PORTRAIT_HEIGHT = 100;
     
 }
 
-void CharacterSelectWindow::initializeComponents(sf::Vector2u&) {
-    INTRO_WIDTH = 180;
-    INTRO_HEIGHT = 300;
+void CharacterSelectWindow::initializeComponents(sf::Vector2u&, int playerSelected) {
+    setSelectedPlayerId(playerSelected);
     int characterId = 0;
     int characterIntroId = 0;
-    selectedPlayerId = 0;
-    PORTRAIT_WIDTH = 80;
-    PORTRAIT_HEIGHT = 100;
 
     for (const auto& [filename, texture] : getTextures()) {
         sf::Sprite sprite;
@@ -118,13 +123,13 @@ void CharacterSelectWindow::renderScreen(sf::RenderWindow& wind) {
     wind.draw(selectButton);
 }
 
-void CharacterSelectWindow::handleInput(sf::RenderWindow& wind, Game& game) {
+int CharacterSelectWindow::handleInput(sf::RenderWindow& wind) {
     sf::Vector2i mousePos = sf::Mouse::getPosition(wind);
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
         for (auto& [characterId, sprite] : characterList) {
             if (sprite.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
-                selectedPlayerId = characterId;
+                setSelectedPlayerId(characterId);
                 selectedCharacterSprite = character[characterId];
                 isCharacterSelected = true;
 
@@ -137,14 +142,34 @@ void CharacterSelectWindow::handleInput(sf::RenderWindow& wind, Game& game) {
 
         // Check if "Select" button is clicked
         if (selectButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
-            if (game.getCurrentState() != 2) {
+            /*if (game.getCurrentState() != 2) {
                 game.setCurrentState(2);
-            }
+                std::string arr[] = { "brienne","danaerys", "jonsnow"};
+                std::cout << "selectedPlayerId" << selectedPlayerId << std::endl;
+                game.setPlayerSelected(arr[selectedPlayerId]);
+            }*/
+            return 1;
         }
     }
+    return 0;
 }
 
-
+void CharacterSelectWindow::operator=(const CharacterSelectWindow* other) {
+    this->selectedPlayerId = other->selectedPlayerId;
+    this->selectedCharacterSprite = other->selectedCharacterSprite;
+    this->characterDetailsText = other->characterDetailsText;      // Text to show character details
+    this->selectButton = other->selectButton;    // Button for final selection
+    this->PORTRAIT_WIDTH = other->PORTRAIT_WIDTH;
+    this->PORTRAIT_HEIGHT = other->PORTRAIT_HEIGHT;
+    this->INTRO_WIDTH = other->INTRO_WIDTH;
+    this->INTRO_HEIGHT = other->INTRO_HEIGHT;
+    this->isCharacterSelected = other->isCharacterSelected;   // Tracks whether a character is selected
+    this->gameNameText = other->gameNameText;
+    this->gameNameTestBg = other->gameNameTestBg;
+    this->characterList = other->characterList;
+    this->character = other->character;
+    this->bgCharacters = other->bgCharacters;
+}
 
 CharacterSelectWindow::~CharacterSelectWindow() {
 
