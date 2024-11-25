@@ -7,6 +7,15 @@ FightWindow::FightWindow(sf::Vector2u& windowSize) {
 
 void FightWindow::initializeComponents(sf::Vector2u&, int playerSelected) {
 	setSelectedPlayerId(playerSelected);
+	std::string s = "brienne";
+	if (playerSelected == 2) {
+		s = "jonsnow";
+	}
+	else if (playerSelected == 1) {
+		s = "danaerys";
+	}
+	p1->setSelectedCharacter(s);
+	
 }
 void FightWindow::renderScreen(sf::RenderWindow& window) {
 	p1->animate(false);

@@ -11,7 +11,7 @@ class Game {
 private:
 	int currentState;
 	/*sf::RenderWindow& window;*/
-	std::string playerSelected;
+	int playerSelected;
 	StartScreen* startScreen;
 	CharacterSelectWindow* characterSelectScreen;
 	FightWindow* fightScreen;
@@ -22,8 +22,8 @@ public:
 	Game(sf::Vector2u&);
 	void setCurrentState(int);
 	int getCurrentState();
-	void setPlayerSelected(std::string&);
-	std::string& getPlayerSelected();
+	void setPlayerSelected(int);
+	int getPlayerSelected();
 	void setCurrentScreen(BaseWindow*);
 	BaseWindow* getCurrentScreen();
 	

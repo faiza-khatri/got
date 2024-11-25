@@ -2,7 +2,6 @@
 #define CHARACTERSELECTWINDOW_H
 
 #include "baseWindow.h"
-#include "game.h"
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <map>
@@ -41,20 +40,13 @@ public:
 	int handleInput(sf::RenderWindow&) override; 
 
 
-    sf::Sprite selectedCharacterSprite;   
-    sf::Text characterDetailsText;       
-
-   /* sf::RectangleShape selectButton;    */    
+ 
     sf::Sprite selectButtonSprite;           
     sf::Texture selectButtonTexture;         
 
     sf::SoundBuffer clickBuffer;             // click sound
     sf::Sound clickSound;                    // Click sound
-
-    float INTRO_WIDTH, INTRO_HEIGHT;
-    float PORTRAIT_WIDTH, PORTRAIT_HEIGHT;
-
-    sf::RectangleShape bgCharacters;         
+        
 };
 
 #endif 

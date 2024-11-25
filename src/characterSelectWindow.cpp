@@ -35,8 +35,6 @@ void CharacterSelectWindow::initializeComponents(sf::Vector2u&, int playerSelect
     int characterId = 0;
     int characterIntroId = 0;
 
-    int characterId = 0;
-    int characterIntroId = 0;
     for (const auto& [filename, texture] : getTextures()) {
         sf::Sprite sprite;
         sprite.setTexture(texture);
@@ -62,7 +60,7 @@ void CharacterSelectWindow::initializeComponents(sf::Vector2u&, int playerSelect
         }
     }
 
-    if (!selectButtonTexture.loadFromFile("C:\\Users\\hp\\Desktop\\HABIB\\oopClonedTemplate\\got\\pngImages\\characterIntros\\sel.png")) {
+    if (!selectButtonTexture.loadFromFile(std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\characterIntros\\sel.png")) {
         std::cerr << "Error: Unable to load sel.png!" << std::endl;
     }
     else {
@@ -137,6 +135,7 @@ int CharacterSelectWindow::handleInput(sf::RenderWindow& wind) {
         for (auto& [characterId, sprite] : characterList) {
             if (sprite.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
                 setSelectedPlayerId(characterId);
+                std::cout << "character id" << characterId << std::endl;
                 selectedCharacterSprite = character[characterId];
                 isCharacterSelected = true;
 
@@ -149,7 +148,7 @@ int CharacterSelectWindow::handleInput(sf::RenderWindow& wind) {
 
 
         // Check if "Select" button is clicked
-        if (selectButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
+        if (selectButtonSprite.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
             return 1;
         }
     }

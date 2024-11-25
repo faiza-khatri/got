@@ -27,7 +27,7 @@ private:
     sf::SoundBuffer clickSoundBuffer;   
     sf::Sound clickSound;              
     sf::Music backgroundMusic;         
-    void loadAudio(); 
+    /*void loadAudio(); */
 
 };
 

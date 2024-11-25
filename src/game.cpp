@@ -9,12 +9,12 @@ int Game::getCurrentState() {
 }
 
 
-std::string& Game::getPlayerSelected(){
+int Game::getPlayerSelected(){
 	return playerSelected;
 }
 
-void Game::setPlayerSelected(std::string& str) {
-	playerSelected = str;
+void Game::setPlayerSelected(int pl) {
+	playerSelected = pl;
 }
 
 Game::Game(sf::Vector2u& windowSize) {
@@ -27,13 +27,13 @@ Game::Game(sf::Vector2u& windowSize) {
 	screens[1] = characterSelectScreen;
 	screens[2] = fightScreen;
 	currentScreen = screens[currentState];
-	playerSelected = "danaerys";
-	currentScreen->initializeComponents(windowSize, currentScreen->getSelectedPlayerId());
+	playerSelected = 1;
+	currentScreen->initializeComponents(windowSize, playerSelected);
 	/*this->window = wind;*/
 }
 
 void Game::intializeComponents(sf::Vector2u& windowSize) {
-	currentScreen->initializeComponents(windowSize, currentScreen->getSelectedPlayerId());
+	currentScreen->initializeComponents(windowSize, playerSelected);
 }
 
 void Game::handleInput(sf::RenderWindow& window) {

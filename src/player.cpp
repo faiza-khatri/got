@@ -13,7 +13,7 @@ Player::Player(int hlth, int spd, int attackPwr, std::string nm, int pl) {
 	setAttackPower(attackPwr);
 	setSprite(player);
 	setName(nm);
-	std::string s = "danaerys";
+	/*std::string s = "danaerys";
 	if (pl == 0) {
 		s = "jonsnow";
 	}
@@ -21,7 +21,7 @@ Player::Player(int hlth, int spd, int attackPwr, std::string nm, int pl) {
 		s = "brienne";
 	}
 	
-	setSelectedCharacter(s);
+	setSelectedCharacter(s);*/
 	setCurrentFrame(0);
 	std::string folderPath = std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\player";
 	loadCharVarTextures(folderPath);
