@@ -6,6 +6,7 @@
 
 
 Player::Player(int hlth, int spd, int attackPwr, std::string nm, int pl) {
+	std::cout << "i called this constrcutor ..." << std::endl;
 	sf::Sprite player;
 	setState(0); // defaut is idle
 	setHealth(hlth);
@@ -13,15 +14,18 @@ Player::Player(int hlth, int spd, int attackPwr, std::string nm, int pl) {
 	setAttackPower(attackPwr);
 	setSprite(player);
 	setName(nm);
-	/*std::string s = "danaerys";
+	std::string s;
 	if (pl == 0) {
-		s = "jonsnow";
-	}
-	else if (pl == 2) {
 		s = "brienne";
 	}
+	else if (pl == 2) {
+		s = "jonsnow";
+	}
+	else if (pl == 1) {
+		s = "danaerys";
+	}
 	
-	setSelectedCharacter(s);*/
+	setSelectedCharacter(s);
 	setCurrentFrame(0);
 	std::string folderPath = std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\player";
 	loadCharVarTextures(folderPath);
@@ -67,6 +71,7 @@ Player::Player(int hlth, int spd, int attackPwr, std::string nm, int pl) {
 }
 
 Player::Player() {
+	std::cout << "i called the wrong constrcutor ..." << std::endl;
 	sf::Sprite player;
 	setState(0); // defaut is idle
 	setHealth(100);

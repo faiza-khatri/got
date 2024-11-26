@@ -135,7 +135,7 @@ int CharacterSelectWindow::handleInput(sf::RenderWindow& wind) {
         for (auto& [characterId, sprite] : characterList) {
             if (sprite.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
                 setSelectedPlayerId(characterId);
-                std::cout << "character id" << characterId << std::endl;
+                std::cout << "character id " << getSelectedPlayerId() << std::endl;
                 selectedCharacterSprite = character[characterId];
                 isCharacterSelected = true;
 

@@ -1,7 +1,8 @@
 #include "fightWindow.h"
 
-FightWindow::FightWindow(sf::Vector2u& windowSize) {
-	p1 = new Player(100, 10, 20, "danaerys", getSelectedPlayerId());
+FightWindow::FightWindow(sf::Vector2u& windowSize, int pl) {
+	/*std::cout << "selected player id from fightWindow: " << getSelectedPlayerId() << std::endl;*/
+	p1 = new Player(100, 10, 20, "danaerys", pl);
 	changeActiveStatus(0);
 }
 
