@@ -108,10 +108,10 @@ void Character::animate(bool flip) {
 	if (elapsedTime >= frameDuration) {
 		std::cout << selectedCharacter << ": " << idx << std::endl;
 		elapsedTime = 0.0f;
-		std::cout << "Current frame = " << currentFrame << std::endl;
+		/*std::cout << "Current frame = " << currentFrame << std::endl;
 		std::cout << "Offset = " << currentFrame * frameWidth << std::endl;
 		std::cout << "Frame Width = " << frameWidth << std::endl;
-		std::cout << "Frame Height = " << frameHeight << std::endl;
+		std::cout << "Frame Height = " << frameHeight << std::endl;*/
 		sprite.setTextureRect(sf::IntRect(currentFrame * frameWidth, 0, frameWidth, frameHeight));
 		currentFrame = (currentFrame + 1);
 		

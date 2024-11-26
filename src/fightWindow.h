@@ -21,7 +21,7 @@
 class FightWindow : public BaseWindow, public sf::RenderWindow {
 public:
     /*FightWindow();*/
-    FightWindow(sf::Vector2u&);
+    FightWindow(sf::Vector2u& windowSize, int);
     void initializeComponents(sf::Vector2u&, int) override;
     void renderScreen(sf::RenderWindow& window) override;
     int handleInput(sf::RenderWindow&);
