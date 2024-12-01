@@ -14,6 +14,7 @@
 #include <SFML/Window/Mouse.hpp>
 
 #include "player.h"
+#include "enemy.h"
 //#include "game.h"
 
 
@@ -29,6 +30,8 @@ public:
     ~FightWindow();
 private:
     Player* p1;
+    Enemy* enemy;
+
     
 };
 
