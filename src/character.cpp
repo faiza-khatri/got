@@ -6,10 +6,10 @@
 void Character::loadCharVarTextures(std::string& folderPath) {
 	
 	try {
-		std::map<std::string, std::array<sf::Texture, 3>> map;
+		std::map<std::string, std::array<sf::Texture, 5>> map;
 
 		for (const auto& entry : std::filesystem::directory_iterator(folderPath)) {
-			std::array<sf::Texture, 3> arr;
+			std::array<sf::Texture, 5> arr;
 			int i = 0;
 			for (const auto& subEntry : std::filesystem::directory_iterator(entry.path())) {
 				sf::Texture t;
@@ -35,8 +35,8 @@ void Character::loadCharVarTextures(std::string& folderPath) {
 }
 
 
-void Character::animate(bool flip) {
-	float frameDuration = 0.15f;
+void Character::animate(bool flip, std::string& charAnimated) {
+	float frameDuration = 0.1f;
 	int idx = 2;
 	if (state == 1) {
 		idx = 0;
@@ -44,77 +44,71 @@ void Character::animate(bool flip) {
 	else if (state == -1) {
 		idx = 1;
 	}
-
-	sf::Texture animationTexture = charVars[selectedCharacter][idx];
+	else if (state == 2) {
+		idx = 3;
+	}
+	else if (state == 3) {
+		idx = 4;
+	}
 	
 
-	int frameWidth, frameHeight, numFrames;
+	int frameWidth, frameHeight, numFrames = 2;
+	frameHeight = 128;
+	frameWidth = 128;
 
-	if (selectedCharacter == "jonsnow") {
-		frameHeight = 84;
+	if (charAnimated == "jonsnow" || charAnimated=="brienne" || charAnimated == "danaerys") {
 		if (state==0) {
-			frameWidth = 96;
-			numFrames = 7;
+			numFrames = 6;
 		}
 		else if (state==-1) {
-			frameWidth = 96;
+			numFrames = 2;
+		}
+		else if(state == 1){
 			numFrames = 6;
 		}
-		else {
-			frameWidth = 96;
-			numFrames = 6;
-		}
-	} else if (selectedCharacter == "brienne") {
-		frameHeight = 80;
-		if (state == 0) {
-			frameWidth = 64;
-			numFrames = 4;
-		}
-		else if (state == -1) {
-			frameWidth = 64;
-			numFrames = 4;
-		}
-		else {
-			frameWidth = 96;
+		else if (state == 2) {
 			numFrames = 8;
 		}
-	}
-	else {
-		frameHeight = 64;
-		frameWidth = 100;
-		if (state == 0) {
-			numFrames = 4;
+		else if (state == 3) {
+			if (selectedCharacter == "brienne") {
+				numFrames = 3;
+			}
+			else {
+				numFrames = 2;
+			}
 		}
-		else if (state==1) {
+	}
+	else  {
+	
+		if (state == 0) {
+			numFrames = 11;
+		}
+		else if (state == 1) {
 			numFrames = 6;
 		}
 		else {
-			numFrames = 5;
-		}
+			numFrames = 2;
+		} 
 	}
 
 	elapsedTime += animationClock.restart().asSeconds();
 
-	/*sprite.setTexture(animationTexture);*/
-
 
 	if (currentFrame >= numFrames) {
+		sprite.setTexture(charVars[selectedCharacter][2]);
 		currentFrame = 0;
 		state = 0;
-		sprite.setTexture(charVars[selectedCharacter][2]);
+		
 	}
+
+	//float actframeWidth = facingRight ? frameWidth : -frameWidth;
 
 
 	if (elapsedTime >= frameDuration) {
-		std::cout << selectedCharacter << ": " << idx << std::endl;
+		/*std::cout << selectedCharacter << ": " << idx << std::endl;*/
 		elapsedTime = 0.0f;
-		/*std::cout << "Current frame = " << currentFrame << std::endl;
-		std::cout << "Offset = " << currentFrame * frameWidth << std::endl;
-		std::cout << "Frame Width = " << frameWidth << std::endl;
-		std::cout << "Frame Height = " << frameHeight << std::endl;*/
 		sprite.setTextureRect(sf::IntRect(currentFrame * frameWidth, 0, frameWidth, frameHeight));
 		currentFrame = (currentFrame + 1);
-		
 		
 	}
 
@@ -125,13 +119,33 @@ void Character::animate(bool flip) {
 
 
 
-void Character::move(int dir) { 
-	//////////// later add logic for the case where two characters may override each other
-	float xPos = sprite.getPosition().x;
-	if (xPos + (2 * dir) > 0 && xPos + (2 * dir) < 1600) {
-		sprite.setPosition(xPos + (2 * dir), sprite.getPosition().y);
+void Character::move(int dir, Character* chr) {
+	float speed = 1000.0f;    // Movement speed
+	float deltaTime = 0.03f;  // Approx. frame time for 60 FPS
+	float safetyDistance = 70.0f;  // Minimum allowed distance between characters
+
+	// Calculate new position
+	float newPos = sprite.getPosition().x + (dir * speed * deltaTime);
+	float otherPos = chr->getSprite().getPosition().x;
+
+	// Boundary check
+	bool withinBounds = (newPos > 0 && newPos < 800);
+
+	// Collision check
+	bool notOverlapping = true;  // Default to true (no restriction when moving away)
+	//if (dir > 0) {  // Moving right
+		notOverlapping = (newPos + safetyDistance < otherPos);
+	if (withinBounds && notOverlapping) {
+		sprite.move(dir * speed * deltaTime, 0.0f);
+		std::cout << "Moved to: " << sprite.getPosition().x << std::endl;
+	}
+	else {
+		std::cout << "Movement blocked. Current position: "
+			<< sprite.getPosition().x << ", Other position: " << otherPos << std::endl;
 	}
 }
+
+
 
 void Character::drawChar(sf::RenderWindow& window) {
 	window.draw(sprite);
@@ -227,10 +241,10 @@ void Character::setAnimationClock(sf::Clock& clk) {
 	animationClock = clk;
 }
 
-void Character::setCharVar(std::map<std::string, std::array<sf::Texture, 3>>& map) {
+void Character::setCharVar(std::map<std::string, std::array<sf::Texture, 5>>& map) {
 	charVars = map;
 }
-std::map<std::string, std::array<sf::Texture, 3>>& Character::getCharVar() {
+std::map<std::string, std::array<sf::Texture, 5>>& Character::getCharVar() {
 	return charVars;
 }
 
@@ -240,6 +254,41 @@ sf::Texture& Character::getCharTexture() {
 
 void Character::setCharTexture(sf::Texture& txt) {
 	charTexture = txt;
+}
+
+void Character::setPosition(sf::Vector2f& pos) {
+	getSprite().Sprite::setPosition(pos);
+}
+
+sf::Vector2f Character::getPosition() {
+	return sprite.Sprite::getPosition();
+}
+
+bool Character::isFacingRight() {
+	return facingRight;
+}
+
+void Character::setFacingRight(bool dir) {
+	facingRight = dir;
+}
+
+void Character::changeDirection() {
+	sprite.setOrigin({ abs(sprite.getLocalBounds().width) / 2.0f, abs(sprite.getLocalBounds().height) / 2.0f });
+	
+	facingRight = !facingRight;
+	
+	sf::Vector2f currentPosition = sprite.getPosition(); 
+	if (facingRight) {
+		sprite.setScale({ 2.0f, 2.0f });
+	}
+	else {
+		sprite.setScale({ -2.0f, 2.0f });
+		/*sprite.setOrigin({ abs(sprite.getLocalBounds().width) / 2.0f, abs(sprite.getLocalBounds().height) / 2.0f });*/
+	}
+	
+	sprite.setPosition(currentPosition.x, currentPosition.y);
+	
+
 }
 
 Character::~Character() {

@@ -40,7 +40,7 @@ void Game::intializeComponents(sf::Vector2u& windowSize) {
 
 void Game::handleInput(sf::RenderWindow& window) {
 	sf::Vector2u windowSize = window.getSize();
-	if (currentScreen->handleInput(window) == 1) {
+	if (currentScreen->handleInput(window)) {
 		if (currentState == 1) {
 			playerSelected = currentScreen->getSelectedPlayerId();
 			/*std::cout << "selected player id from actual game: " << currentScreen->getSelectedPlayerId() << std::endl;*/
