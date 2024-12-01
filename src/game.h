@@ -6,6 +6,7 @@
 #include "startScreen.h"
 #include "characterSelectWindow.h"
 #include "fightWindow.h"
+#include "gameEndScreen.h"
 
 class Game {
 private:

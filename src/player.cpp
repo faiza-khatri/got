@@ -143,11 +143,4 @@ void Player::changeState(sf::Vector2f&, Character* enemy) {
 	}
 	
 
-	/*else {
-		if (getState() != 0) {
-			setState(0);
-			setCurrentFrame(0);
-		}
-
-	}*/
 }
