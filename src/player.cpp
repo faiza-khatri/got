@@ -144,7 +144,8 @@ int Player::changeState(sf::Vector2f&, Character* enemy) {
 			}
 		}
 
-		return 0;
 
 	}
+
+	return 0;
 }
