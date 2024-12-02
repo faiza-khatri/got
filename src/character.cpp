@@ -65,13 +65,13 @@ void Character::animate(bool flip, std::string& charAnimated, int numFrames, int
         currentFrame = (currentFrame + 1); // go to next frame
 
         if (state == 1) {
-            playSwordSound("C:\\Users\\hp\\Desktop\\HABIB\\oopClonedTemplate\\got\\sounds\\swordSound.wav");
+            playSwordSound(std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\sounds\\swordSound.wav");
         }
         if (state == 4) {
-            playSwordSound("C:\\Users\\hp\\Desktop\\HABIB\\oopClonedTemplate\\got\\sounds\\swordSound.wav");
+            playSwordSound(std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\sounds\\swordSound.wav");
         }
         if (state == 5) {
-            playSwordSound("C:\\Users\\hp\\Desktop\\HABIB\\oopClonedTemplate\\got\\sounds\\swordSound.wav");
+            playSwordSound(std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\sounds\\swordSound.wav");
         }
     }
 
