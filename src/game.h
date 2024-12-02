@@ -11,15 +11,11 @@
 class Game {
 private:
 	int currentState;
-	/*sf::RenderWindow& window;*/
 	int playerSelected;
 	int playerSelected2;
-	/*StartScreen* startScreen;
-	CharacterSelectWindow* characterSelectScreen;
-	FightWindow* fightScreen;*/
 	BaseWindow* currentScreen;
 	std::vector<BaseWindow*> screens;
-	/*std::map<int, BaseWindow*> screens;*/
+	
 	sf::Sprite bg;
 
 public:

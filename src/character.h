@@ -34,10 +34,12 @@ private:
     sf::Sound swordSound;
 
 public:
+
     void move(int, Character*); // -1 for left, 1 for right
     void animate(bool flip, std::string&, int, int);
     void playSwordSound(const std::string& soundFilePath);
     void stopSwordSound();
+
 
     void loadCharVarTextures(std::string&);
     void drawChar(sf::RenderWindow& window);

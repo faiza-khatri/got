@@ -121,8 +121,7 @@ void FightWindow::renderScreen(sf::RenderWindow& window) {
     
     animateByState(p2);
 
-    ////p1->animate(false, p1->getSelectedCharacter());
-    //enemy->animate(false, enemy->getSelectedCharacter());
+  
 
     window.draw(p1->getSprite());
     window.draw(p2->getSprite());
@@ -155,10 +154,6 @@ int FightWindow::handleInput(sf::RenderWindow&) {
 
     if (p1->getHealth() <= 0) {
         p1->stateUpdate(7, 6);
-        /*if (p1->getState()==0 {
-            return 1;
-        }*/
-        /*return 1;*/
         
     }
     if (p2->getHealth() <=  0) {

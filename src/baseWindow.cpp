@@ -5,9 +5,7 @@
 
 void BaseWindow::loadTextures(std::string& folderPath) {
 
-    /*std::string folderPath = "D:\\oop\\clonedTemplateOOP\\pngImages\\characterIntroPortraits";*/
-    /*for (int j = 0; j < 2; j++)
-    {*/
+    // populates texture map
     int i = 0;
     try {
         for (const auto& entry : std::filesystem::directory_iterator(folderPath)) {
@@ -85,11 +83,3 @@ void BaseWindow::setSelectedPlayerId2(int pl) {
 int BaseWindow::getSelectedPlayerId2() {
     return selectedPlayerId2;
 }
-
-//void BaseWindow::setCurrBg(sf::Sprite& bg) {
-//    currBg = bg;
-//}
-//
-//sf::Sprite& BaseWindow::getCurrBg() {
-//    return currBg;
-//}

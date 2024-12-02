@@ -14,7 +14,7 @@ FetchContent_Declare(SFML
 FetchContent_MakeAvailable(SFML)
 
 
-add_executable(oopGame "src/main.cpp" "src/baseWindow.h" "src/baseWindow.cpp" "src/characterSelectWindow.h" "src/characterSelectWindow.cpp" "src/character.h" "src/character.cpp" "src/player.h" "src/player.cpp" "src/fightWindow.h" "src/fightWindow.cpp" "src/startScreen.h" "src/startScreen.cpp" "src/game.h" "src/game.cpp" "src/enemy.h" "src/enemy.cpp" "src/gameEndScreen.h" "src/gameEndScreen.cpp")
+add_executable(oopGame "src/main.cpp" "src/baseWindow.h" "src/baseWindow.cpp" "src/characterSelectWindow.h" "src/characterSelectWindow.cpp" "src/character.h" "src/character.cpp" "src/player.h" "src/player.cpp" "src/fightWindow.h" "src/fightWindow.cpp" "src/startScreen.h" "src/startScreen.cpp" "src/game.h" "src/game.cpp"   "src/gameEndScreen.h" "src/gameEndScreen.cpp")
 
 target_link_libraries(oopGame PRIVATE sfml-graphics sfml-window sfml-audio)
 target_compile_features(oopGame PRIVATE cxx_std_17)

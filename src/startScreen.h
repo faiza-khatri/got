@@ -9,7 +9,7 @@
 
 class StartScreen : public BaseWindow {
 public:
-    /*StartScreen();*/
+
     StartScreen(sf::Vector2u& windowSize);
     void initializeComponents(sf::Vector2u&, int, int) override;
     void renderScreen(sf::RenderWindow& window) override;
@@ -31,7 +31,7 @@ private:
     std::map<int, sf::Texture> bgMap;
     int numBgs;
     int currBg;
-    /*void loadAudio(); */
+    
 
 };
 
