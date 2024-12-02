@@ -68,7 +68,7 @@ void Character::animate(bool flip, std::string& charAnimated, int numFrames, int
 
 
 void Character::move(int dir, Character* chr) {
-	float speed = 1000.0f;    // Movement speed
+	float speed = 900.0f;    // Movement speed
 	float deltaTime = 0.03f;  // Approx. frame time for 60 FPS
 	float safetyDistance = 70.0f;  // Minimum allowed distance between characters
 

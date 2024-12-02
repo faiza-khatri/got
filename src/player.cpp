@@ -158,6 +158,7 @@ int Player::changeState(sf::Vector2f&, Character* enemy,
 			enemy->getState() == 4 || enemy->getState() == 5) && facingEachOther ) {
 			setHealth(getHealth() - 5);
 			std::cout << "health of player: " << getHealth() << std::endl;
+			move(isFacingRight() ? -1 : 1, enemy);
 			if (getState() != 3) {
 				setCurrentFrame(0);
 				setCharTexture(getCharVar()[getSelectedCharacter()][4]);
