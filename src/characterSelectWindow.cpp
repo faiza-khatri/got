@@ -89,7 +89,7 @@ void CharacterSelectWindow::initializeComponents(sf::Vector2u&, int playerSelect
         float scale = std::min(scaleX, scaleY); // aspect ratio
         selectButtonSprite.setScale(scale, scale);
 
-        selectButtonSprite.setPosition(600, 400);
+        selectButtonSprite.setPosition(600, 500);
     }
 
 

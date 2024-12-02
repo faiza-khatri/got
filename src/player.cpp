@@ -152,7 +152,10 @@ int Player::changeState(sf::Vector2f&, Character* enemy,
 	float distance = getSprite().getPosition().x - enemy->getSprite().getPosition().x;
 
 	if (abs(distance) < 150.0f) {
-		if (getState() != -1 && getState() != 1 && (enemy->getState() == 1 || enemy->getState() == 4 || enemy->getState() == 5)) {
+		bool facingEachOther = (isFacingRight() && !enemy->isFacingRight()) || 
+			(!isFacingRight() && enemy->isFacingRight());
+		if (getState() != -1 && getState() != 1 && (enemy->getState() == 1 || 
+			enemy->getState() == 4 || enemy->getState() == 5) && facingEachOther ) {
 			setHealth(getHealth() - 5);
 			std::cout << "health of player: " << getHealth() << std::endl;
 			if (getState() != 3) {
