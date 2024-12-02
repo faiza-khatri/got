@@ -8,21 +8,21 @@
 
 class GameOverWindow : public BaseWindow {
 public:
-    GameOverWindow(sf::Vector2u& windowSize);  
-    ~GameOverWindow(); 
+    GameOverWindow(sf::Vector2u& windowSize);
+    ~GameOverWindow();
 
-    void renderScreen(sf::RenderWindow& wind) ;  
-    void handleInput(sf::RenderWindow& wind, Game& game);  
+    void renderScreen(sf::RenderWindow& wind);
+    int handleInput(sf::RenderWindow& wind);
 
 private:
-    void initializeComponents(sf::Vector2u& windowSize); 
+    void initializeComponents(sf::Vector2u& windowSize);
 
-    sf::Sprite gameOverSprite;  
-    sf::RectangleShape playAgainButton; 
-    sf::Texture gameOverTexture;  
-    sf::Texture playAgainTexture;  
-    sf::SoundBuffer clickBuffer;  
-    sf::Sound clickSound;        
+    sf::Sprite gameOverSprite;
+    sf::RectangleShape playAgainButton;
+    sf::Texture gameOverTexture;
+    sf::Texture playAgainTexture;
+    sf::SoundBuffer clickBuffer;
+    sf::Sound clickSound;
 };
 
 #endif // GAMEOVERWINDOW_H
