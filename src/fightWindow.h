@@ -15,7 +15,6 @@
 
 #include "player.h"
 
-//#include "game.h"
 
 
 class FightWindow : public BaseWindow, public sf::RenderWindow {
