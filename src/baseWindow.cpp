@@ -8,30 +8,30 @@ void BaseWindow::loadTextures(std::string& folderPath) {
     /*std::string folderPath = "D:\\oop\\clonedTemplateOOP\\pngImages\\characterIntroPortraits";*/
     /*for (int j = 0; j < 2; j++)
     {*/
-        int i = 0;
-        try {
-            for (const auto& entry : std::filesystem::directory_iterator(folderPath)) {
-                if (entry.is_regular_file() && entry.path().extension() == ".png") {
-                    sf::Texture texture;
-                    if (texture.loadFromFile(entry.path().string())) {
-                        setTextureElement(entry.path().filename().string(), texture);
-                        std::cout << "Loaded texture: " << entry.path().filename().string() << std::endl;
-                    }
-                    else {
-                        std::cerr << "Failed to load texture: " << entry.path().filename().string() << std::endl;
-                    }
+    int i = 0;
+    try {
+        for (const auto& entry : std::filesystem::directory_iterator(folderPath)) {
+            if (entry.is_regular_file() && entry.path().extension() == ".png") {
+                sf::Texture texture;
+                if (texture.loadFromFile(entry.path().string())) {
+                    setTextureElement(entry.path().filename().string(), texture);
+                    std::cout << "Loaded texture: " << entry.path().filename().string() << std::endl;
+                }
+                else {
+                    std::cerr << "Failed to load texture: " << entry.path().filename().string() << std::endl;
                 }
             }
         }
-        catch (const std::exception& e) {
-            std::cerr << "Error accessing directory: " << e.what() << std::endl;
-        }
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Error accessing directory: " << e.what() << std::endl;
+    }
 }
 
 
 
 sf::Texture& BaseWindow::getTextures(std::string& fileName) {
-	return textures[fileName];
+    return textures[fileName];
 }
 
 // setters
@@ -48,20 +48,20 @@ void BaseWindow::setTextures(const std::map<std::string, sf::Texture>& newTextur
 }
 
 void BaseWindow::setTextureElement(const std::string& fileName, const sf::Texture& texture) {
-	textures[fileName] = texture;
+    textures[fileName] = texture;
 }
 
 // getters
 sf::Sprite& BaseWindow::getBgSprite() {
-	return bgSprite;
+    return bgSprite;
 }
 
 sf::Font& BaseWindow::getFont() {
-	return font;
+    return font;
 }
 
 std::map<std::string, sf::Texture>& BaseWindow::getTextures() {
-	return textures;
+    return textures;
 }
 
 bool BaseWindow::getActiveStatus() {
@@ -72,9 +72,9 @@ void BaseWindow::changeActiveStatus(bool act) {
     active = act;
 }
 
-void BaseWindow::setSelectedPlayerId( int pl) {
+void BaseWindow::setSelectedPlayerId(int pl) {
     selectedPlayerId = pl;
 }
- int BaseWindow::getSelectedPlayerId() {
+int BaseWindow::getSelectedPlayerId() {
     return selectedPlayerId;
 }

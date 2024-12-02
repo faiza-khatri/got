@@ -24,9 +24,9 @@ private:
     std::map<int, sf::Sprite> spriteList;
 
     // Sound-related members
-    sf::SoundBuffer clickSoundBuffer;   
-    sf::Sound clickSound;              
-    sf::Music backgroundMusic;         
+    sf::SoundBuffer clickSoundBuffer;
+    sf::Sound clickSound;
+    sf::Music backgroundMusic;
     /*void loadAudio(); */
 
 };

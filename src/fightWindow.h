@@ -36,8 +36,6 @@ private:
     sf::RectangleShape lifeBar;                            // Rectangle for the life bar
     sf::Clock clock;
 
-
-    
 };
 
 #endif

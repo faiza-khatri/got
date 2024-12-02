@@ -10,6 +10,7 @@ EndScreen::EndScreen(sf::Vector2u& windowSize, bool wn) {
 	//std::cout << "Player won: " << wn << std::endl;
     this->won = wn ? 1 : 0;
    /* std::cout << "won: " << won << std::endl;*/
+
 }
 
 void EndScreen::initializeComponents(sf::Vector2u& windowSize, int playerSelected) {
