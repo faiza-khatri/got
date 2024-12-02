@@ -76,7 +76,7 @@ int Enemy::changeState(sf::Vector2f& playerPos, Character* player) {
 	// Calculate distance to the player
 	float distance = player->getSprite().getPosition().x - getSprite().getPosition().x;
 
-	if (abs(distance) < 180.0f) {
+	if (abs(distance) < 150.0f) {
 		randNum = rand() % 2;
 		std::cout << "randNum" << randNum << std::endl;
 		if (randNum && player->getState() != 1) {
@@ -102,6 +102,19 @@ int Enemy::changeState(sf::Vector2f& playerPos, Character* player) {
 			return 1;
 		}
 	}
+	/*else {*/
+		int randMove = (rand() % 3) - 1;
+		std::cout << "i want to move: " << randMove << std::endl;
+		if (randMove == -1 || randMove == 1) {
+			move(randMove, player);
+			if (getState() != 2) {
+				setCurrentFrame(0);
+				setCharTexture(getCharVar()[getSelectedCharacter()][3]); // walk
+				getSprite().setTexture(getCharTexture());
+				setState(2); // walk
+			}
+		}
+	/*}*/
 	return 0;
 
 	
