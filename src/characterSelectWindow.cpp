@@ -13,11 +13,12 @@ CharacterSelectWindow::CharacterSelectWindow(sf::Vector2u& windowSize) {
     loadTextures(std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\characterIntroPortraits");
     loadTextures(std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\characterIntros");
 
-    p1 = new Player(100, 10, 20, "danaerys", 0, 0);
-    p2 = new Player(100, 10, 20, "danaerys", 0, 1);
+    p1 = new Player(100, 10, 20, "danaerys", 1, 0);
+    p2 = new Player(100, 10, 20, "danaerys", 1, 1);
 
     // populates characterlist
 
+    // get sound for click
     std::string clickSoundPath = std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\sounds\\click.wav";
     if (!clickBuffer.loadFromFile(clickSoundPath)) {
         std::cerr << "Error: Unable to load click sound!" << std::endl;
@@ -36,13 +37,18 @@ CharacterSelectWindow::CharacterSelectWindow(sf::Vector2u& windowSize) {
 void CharacterSelectWindow::initializeComponents(sf::Vector2u&, int playerSelected, int pl2) {
     p1->changeDirection();
     p1->changeDirection();
+
+    // enemy faces opposite direction
     p2->changeDirection();
 
-
+    // decide players
     setSelectedPlayerId1(playerSelected);
     setSelectedPlayerId2(pl2);
+
     int characterId = 0;
     int characterIntroId = 0;
+
+    // populate character intro list 1 and 2
 
     for (const auto& [filename, texture] : getTextures()) {
         sf::Sprite sprite;
@@ -70,6 +76,7 @@ void CharacterSelectWindow::initializeComponents(sf::Vector2u&, int playerSelect
         }
     }
 
+    // get select button
     if (!selectButtonTexture.loadFromFile(std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\characterIntros\\sel.png")) {
         std::cerr << "Error: Unable to load sel.png!" << std::endl;
     }
@@ -97,9 +104,11 @@ void CharacterSelectWindow::initializeComponents(sf::Vector2u&, int playerSelect
 }
 
 void CharacterSelectWindow::renderScreen(sf::RenderWindow& wind) {
+    // draw relevant srpites
     wind.clear(sf::Color::Black);
     wind.draw(getBgSprite());
     
+    // animate players according to set state
     p1->animate(false, selectedCharacter1, 6, 2); // idle
     p2->animate(false, selectedCharacter2, 6, 2); // idle
 
@@ -112,6 +121,8 @@ void CharacterSelectWindow::renderScreen(sf::RenderWindow& wind) {
     const float startX = 50.0f;
     const float startY = 50.0f;
 
+
+    // draw player 1 character portraits 
     for (auto& [characterIntroId, sprite] : characterList) {
         int row = characterIntroId / portraitsPerRow;
         int col = characterIntroId % portraitsPerRow;
@@ -127,6 +138,8 @@ void CharacterSelectWindow::renderScreen(sf::RenderWindow& wind) {
             startY + row * (PORTRAIT_HEIGHT + marginY) + 5.0f);
         wind.draw(sprite);
     }
+
+    // draw player 2 character portraits 
 
     for (auto& [characterIntroId, sprite] : characterList2) {
         int row = characterIntroId / portraitsPerRow;
@@ -152,11 +165,15 @@ int CharacterSelectWindow::handleInput(sf::RenderWindow& wind) {
     sf::Vector2i mousePos = sf::Mouse::getPosition(wind);
     std::vector<std::string> chars = { "brienne", "danaerys", "jonsnow" };
 
+    // if mouse pressed
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
         for (auto& [characterId, sprite] : characterList) {
+            // if player 1 portrait pressed
             if (sprite.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
+                // set global selection id
                 setSelectedPlayerId1(characterId);
 
+                // set player visual to selected character
                 p1->setSelectedCharacter(chars[characterId]);
 
                 characterDetailsText.setString(
@@ -165,9 +182,15 @@ int CharacterSelectWindow::handleInput(sf::RenderWindow& wind) {
                 break;
             }
         }
+
+
         for (auto& [characterId, sprite] : characterList2) {
+            // if player 2 portrait pressed
             if (sprite.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
+                // set global selected player
                 setSelectedPlayerId2(characterId);
+
+                // set player visual to selected character
                 p2->setSelectedCharacter(chars[characterId]);
 
                 characterDetailsText.setString(

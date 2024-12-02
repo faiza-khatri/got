@@ -5,6 +5,8 @@
 
 void Character::loadCharVarTextures(std::string& folderPath) {
 	
+	// loads all textures of a character in an array
+	// stores array in map
 	try {
 		std::map<std::string, std::array<sf::Texture, 8>> map;
 
@@ -36,30 +38,33 @@ void Character::loadCharVarTextures(std::string& folderPath) {
 
 
 void Character::animate(bool flip, std::string& charAnimated, int numFrames, int idx) {
-	float frameDuration = 0.15f;
+	float frameDuration = 0.15f; // furation of a single frame of a single state
 	
 	int frameHeight = 128;
 	int frameWidth = 128;
 
-	elapsedTime += animationClock.restart().asSeconds();
+	elapsedTime += animationClock.restart().asSeconds(); // update time
 
 
-	if (currentFrame >= numFrames) {
-		if (idx == 7) {
+	if (currentFrame >= numFrames) { // if finished with animation
+		if (idx == 7) { // if state was death
 			die();
-			return;
+			return; // end the animation
 		}
-		sprite.setTexture(charVars[selectedCharacter][2]);
+		// go back to idle state
+		sprite.setTexture(charVars[selectedCharacter][2]); 
 		currentFrame = 0;
 		state = 0;
 		
 	}
 
+	// updation of frame
 	if (elapsedTime >= frameDuration) {
-		elapsedTime = 0.0f;
+		elapsedTime = 0.0f; 
 		
+		// intrect params (x offset, y offset, x width, y height)
 		sprite.setTextureRect(sf::IntRect(currentFrame * frameWidth, 0, frameWidth, frameHeight));
-		currentFrame = (currentFrame + 1);
+		currentFrame = (currentFrame + 1); // go to next frame
 		
 	}
 
@@ -74,16 +79,18 @@ void Character::move(int dir, Character* chr) {
 	float deltaTime = 0.03f;  
 	float safetyDistance = 70.0f;  
 
-	// Calculate new position
+	// calculate new position
 	float newPos = sprite.getPosition().x + (dir * speed * deltaTime);
 	float otherPos = chr->getSprite().getPosition().x;
 
-	// boundary check 
+	// boundary 
 	sf::FloatRect bounds = sprite.getGlobalBounds();
 	float halfWidth = bounds.width / 2.0f;
 
+	// check for no overlap between characters
 	bool safeDistanceMaintained = abs(otherPos - newPos) >= safetyDistance;
 
+	// boundary check
 	bool withinBounds = (newPos - halfWidth >= 0 && newPos + halfWidth <= 800);
 
 	if (withinBounds && safeDistanceMaintained) {
@@ -91,6 +98,7 @@ void Character::move(int dir, Character* chr) {
 		std::cout << "Moved to: " << sprite.getPosition().x << std::endl;
 	}
 	else {
+		// if should not move
 		std::cout << "Movement blocked. Current position: " << sprite.getPosition().x
 			<< ", Other position: " << otherPos << std::endl;
 	}
