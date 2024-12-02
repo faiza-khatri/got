@@ -85,3 +85,11 @@ void BaseWindow::setSelectedPlayerId2(int pl) {
 int BaseWindow::getSelectedPlayerId2() {
     return selectedPlayerId2;
 }
+
+//void BaseWindow::setCurrBg(sf::Sprite& bg) {
+//    currBg = bg;
+//}
+//
+//sf::Sprite& BaseWindow::getCurrBg() {
+//    return currBg;
+//}

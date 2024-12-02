@@ -88,6 +88,7 @@ void FightWindow::animateByState(Character* pl) {
 }
 
 void FightWindow::renderScreen(sf::RenderWindow& window) {
+    window.draw(getBgSprite());
 
     animateByState(p1);
     

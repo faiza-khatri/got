@@ -20,6 +20,7 @@ private:
 	BaseWindow* currentScreen;
 	std::vector<BaseWindow*> screens;
 	/*std::map<int, BaseWindow*> screens;*/
+	sf::Sprite bg;
 
 public:
 	Game(sf::Vector2u&);

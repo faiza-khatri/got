@@ -106,6 +106,7 @@ void CharacterSelectWindow::initializeComponents(sf::Vector2u&, int playerSelect
 
 void CharacterSelectWindow::renderScreen(sf::RenderWindow& wind) {
     wind.clear(sf::Color::Black);
+    wind.draw(getBgSprite());
     
     p1->animate(false, selectedCharacter1, 6, 2); // idle
     p2->animate(false, selectedCharacter2, 6, 2); // idle

@@ -50,6 +50,7 @@ void EndScreen::initializeComponents(sf::Vector2u& windowSize, int playerSelecte
 
 void EndScreen::renderScreen(sf::RenderWindow& wind) {
  /*   std::cout << "won: " << won << std::endl;*/
+    wind.draw(getBgSprite());
     if (this->won) {
         wind.draw(youWon);
     }
@@ -61,6 +62,7 @@ void EndScreen::renderScreen(sf::RenderWindow& wind) {
 }
 
 int EndScreen::handleInput(sf::RenderWindow& wind) {
+
     sf::Vector2i mousePos = sf::Mouse::getPosition(wind);
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {

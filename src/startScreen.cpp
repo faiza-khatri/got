@@ -5,7 +5,32 @@
 
 StartScreen::StartScreen(sf::Vector2u& windowSize) {
     loadTextures(std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\start_scrn");
+    loadBgTextures();
     changeActiveStatus(0);
+    numBgs = 3;
+    currBg = 0;
+}
+
+void StartScreen::loadBgTextures() {
+    try {
+        numBgs = 0;
+        for (const auto& entry : std::filesystem::directory_iterator(std::filesystem::current_path().
+            parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\backgrounds")) {
+            /*if (entry.is_regular_file() && entry.path().extension() == ".png") {*/
+                sf::Texture texture;
+                if (texture.loadFromFile(entry.path().string())) {
+                    bgMap[numBgs++] = texture;
+                    std::cout << "Loaded texture: " << entry.path().filename().string() << std::endl;
+                }
+                else {
+                    std::cerr << "Failed to load texture: " << entry.path().filename().string() << std::endl;
+                }
+            //}
+        }
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Error accessing directory: " << e.what() << std::endl;
+    }
 }
 
 void StartScreen::initializeComponents(sf::Vector2u& windowSize, int playerSelected, int pl2) {
@@ -13,6 +38,8 @@ void StartScreen::initializeComponents(sf::Vector2u& windowSize, int playerSelec
     float buttonWidth = windowSize.x * buttonWidthFactor;
 
     sf::Texture change_bg = getTextures()["changebg.png"];
+
+
 
     getBgSprite().setTexture(getTextures()["bg.png"]);
     playButton.setTexture(getTextures()["play.png"]);
@@ -68,7 +95,10 @@ int StartScreen::handleInput(sf::RenderWindow& wind) {
             backgroundMusic.stop();
             wind.close();
         }
-
+        else if (changeBgButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
+            getBgSprite().setTexture(bgMap[currBg%numBgs]);
+            currBg++;
+        }
     }
     return 0;
 }

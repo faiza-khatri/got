@@ -15,6 +15,7 @@ public:
     void renderScreen(sf::RenderWindow& window) override;
     int handleInput(sf::RenderWindow&) override;
     void operator=(const StartScreen*);
+    void loadBgTextures();
 
 private:
     // UI elements
@@ -27,6 +28,9 @@ private:
     sf::SoundBuffer clickSoundBuffer;
     sf::Sound clickSound;
     sf::Music backgroundMusic;
+    std::map<int, sf::Texture> bgMap;
+    int numBgs;
+    int currBg;
     /*void loadAudio(); */
 
 };
