@@ -78,7 +78,6 @@ void FightWindow::updateLifeBar(float damage) {
 				currentWidth = 0.0f;
 			}
 		}
-
 		clock.restart();
 	}
 
