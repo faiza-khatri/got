@@ -2,6 +2,7 @@
 
 FightWindow::FightWindow(sf::Vector2u& windowSize, int pl) {
     p1 = new Player(100, 10, 20, "danaerys", pl);
+
     changeActiveStatus(0);
     enemy = new Enemy(100, 10, 20, "white", 0);
 

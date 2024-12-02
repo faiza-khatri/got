@@ -131,19 +131,19 @@ void Character::move(int dir, Character* chr) {
 	// Boundary check
 	bool withinBounds = (newPos > 0 && newPos < 800);
 
-	// Collision check
-	bool notOverlapping = true;  // Default to true (no restriction when moving away)
-	//if (dir > 0) {  // Moving right
-		notOverlapping = (newPos + safetyDistance < otherPos);
-	if (withinBounds && notOverlapping) {
+	// Ensure movement maintains at least safetyDistance
+	bool safeDistanceMaintained = abs(otherPos - newPos) >= safetyDistance;
+
+	if (withinBounds && safeDistanceMaintained) {
 		sprite.move(dir * speed * deltaTime, 0.0f);
 		std::cout << "Moved to: " << sprite.getPosition().x << std::endl;
 	}
 	else {
-		std::cout << "Movement blocked. Current position: "
-			<< sprite.getPosition().x << ", Other position: " << otherPos << std::endl;
+		std::cout << "Movement blocked. Current position: " << sprite.getPosition().x
+			<< ", Other position: " << otherPos << std::endl;
 	}
 }
+
 
 
 

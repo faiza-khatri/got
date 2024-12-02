@@ -33,6 +33,7 @@ public:
     sf::RectangleShape enemyLifeBarOutline;
 private:
     Player* p1;
+    //Player* p2;
     Enemy* enemy;
     float playerCurrentWidth; 
     float enemyCurrentWidth;

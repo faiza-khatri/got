@@ -73,24 +73,59 @@ Enemy::Enemy(int hlth, int spd, int attackPwr, std::string nme, int pl) {
 }
 
 int Enemy::changeState(sf::Vector2f& playerPos, Character* player) {
-	// Calculate distance to the player
-	float distance = player->getSprite().getPosition().x - getSprite().getPosition().x;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::P)) {
+		if (getState() != 1) {
+			setCurrentFrame(0);
+			setCharTexture(getCharVar()[getSelectedCharacter()][0]);
+			getSprite().setTexture(getCharTexture());
+			setState(1);
+		}
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::K)) {
+		if (getState() != -1) {
+			setCurrentFrame(0);
+			setCharTexture(getCharVar()[getSelectedCharacter()][1]);
+			getSprite().setTexture(getCharTexture());
+			setState(-1);
+		}
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+
+		move(1, player);
+		if (getState() != 2) {
+			setCurrentFrame(0);
+			setCharTexture(getCharVar()[getSelectedCharacter()][3]);
+			getSprite().setTexture(getCharTexture());
+			setState(2);
+		}
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+		move(-1, player);
+		if (getState() != 2) {
+			setCurrentFrame(0);
+			setCharTexture(getCharVar()[getSelectedCharacter()][3]);
+			getSprite().setTexture(getCharTexture());
+			setState(2);
+		}
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+		if (!isFacingRight()) {
+			changeDirection();
+		}
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)) {
+		if (isFacingRight()) {
+			changeDirection();
+		}
+	}
+
+
+	float distance = getSprite().getPosition().x - player->getSprite().getPosition().x;
 
 	if (abs(distance) < 150.0f) {
-		randNum = rand() % 2;
-		std::cout << "randNum" << randNum << std::endl;
-		if (randNum && player->getState() != 1) {
-
-			if (getState() != 1) {
-				setCurrentFrame(0);
-				setCharTexture(getCharVar()[getSelectedCharacter()][0]);
-				getSprite().setTexture(getCharTexture());
-				setState(1);
-			}
-		}
-
-		if (player->getState() == 1 && getState() != 1) {
-
+		if (getState() != -1 && getState() != 1 && player->getState() == 1) {
 			setHealth(getHealth() - 5);
 			std::cout << "health of enemy: " << getHealth() << std::endl;
 			if (getState() != 3) {
@@ -98,26 +133,14 @@ int Enemy::changeState(sf::Vector2f& playerPos, Character* player) {
 				setCharTexture(getCharVar()[getSelectedCharacter()][4]);
 				getSprite().setTexture(getCharTexture());
 				setState(3);
-			}
-			return 1;
-		}
-	}
-	/*else {*/
-		//int randMove = (rand() % 3) - 1;
-		//std::cout << "i want to move: " << randMove << std::endl;
-		//if (randMove == -1 || randMove == 1) {
-		//	move(randMove, player);
-		//	if (getState() != 2) {
-		//		setCurrentFrame(0);
-		//		setCharTexture(getCharVar()[getSelectedCharacter()][3]); // walk
-		//		getSprite().setTexture(getCharTexture());
-		//		setState(2); // walk
-		//	}
-		//}
-	/*}*/
-	return 0;
 
-	
+			}
+		}
+
+
+	}
+
+	return 0;
 }
 
 

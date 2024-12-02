@@ -88,7 +88,7 @@ int Player::changeState(sf::Vector2f&, Character* enemy) {
 			setState(1);
 		}
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) {
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
 		if (getState() != -1) {
 			setCurrentFrame(0);
 			setCharTexture(getCharVar()[getSelectedCharacter()][1]);
@@ -97,7 +97,7 @@ int Player::changeState(sf::Vector2f&, Character* enemy) {
 		}
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
 
 		move(1, enemy);
 		if (getState() != 2) {
@@ -107,7 +107,7 @@ int Player::changeState(sf::Vector2f&, Character* enemy) {
 			setState(2);
 		}
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
 		move(-1, enemy);
 		if (getState() != 2) {
 			setCurrentFrame(0);
@@ -117,12 +117,12 @@ int Player::changeState(sf::Vector2f&, Character* enemy) {
 		}
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
 		if (!isFacingRight()) {
 			changeDirection();
 		}
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)) {
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
 		if (isFacingRight()) {
 			changeDirection();
 		}
