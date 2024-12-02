@@ -128,6 +128,7 @@ int Player::changeState(sf::Vector2f&, Character* enemy) {
 		}
 	}
 
+
 	float distance = getSprite().getPosition().x - enemy->getSprite().getPosition().x;
 
 	if (abs(distance) < 150.0f) {
@@ -139,9 +140,8 @@ int Player::changeState(sf::Vector2f&, Character* enemy) {
 				setCharTexture(getCharVar()[getSelectedCharacter()][4]);
 				getSprite().setTexture(getCharTexture());
 				setState(3);
-			}
-			return 1;
 
+			}
 		}
 
 
