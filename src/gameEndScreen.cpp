@@ -26,7 +26,6 @@ void EndScreen::initializeComponents(sf::Vector2u& windowSize, int playerSelecte
     youWon.setScale(scaleX, scaleY);
     youWon.setPosition(0, 0);
 
-    // Load the play again button texture
     std::string playAgainPath = std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\end_scrn\\gobu.png";
 
     if (!playAgainTexture.loadFromFile(playAgainPath)) {
@@ -42,10 +41,8 @@ void EndScreen::initializeComponents(sf::Vector2u& windowSize, int playerSelecte
 }
 
 void EndScreen::renderScreen(sf::RenderWindow& wind) {
-    // Render the winner's texture
     wind.draw(youWon);
 
-    // Render the play again button
     wind.draw(playAgainButton);
 }
 
@@ -54,7 +51,7 @@ int EndScreen::handleInput(sf::RenderWindow& wind) {
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
         if (playAgainButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
-            clickSound.play();  // Play click sound
+            clickSound.play();  
             return 1;
         }
     }
