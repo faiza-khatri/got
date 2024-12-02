@@ -28,7 +28,7 @@ public:
 	int getPlayerSelected();
 	void setCurrentScreen(BaseWindow*);
 	BaseWindow* getCurrentScreen();
-	
+
 	void intializeComponents(sf::Vector2u&);
 	void handleInput(sf::RenderWindow& window);
 	void renderScreen(sf::RenderWindow&);

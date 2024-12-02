@@ -8,7 +8,7 @@
 
 Enemy::Enemy(int hlth, int spd, int attackPwr, std::string nme, int pl) {
 	sf::Sprite enemy;
-	
+
 
 	setState(0); // defaut is idle
 	setHealth(hlth);
@@ -75,11 +75,12 @@ Enemy::Enemy(int hlth, int spd, int attackPwr, std::string nme, int pl) {
 int Enemy::changeState(sf::Vector2f& playerPos, Character* player) {
 	// Calculate distance to the player
 	float distance = player->getSprite().getPosition().x - getSprite().getPosition().x;
-	
+
 	if (abs(distance) < 180.0f) {
 		randNum = rand() % 2;
 		std::cout << "randNum" << randNum << std::endl;
-		if (randNum && player->getState()!=1) {
+		if (randNum && player->getState() != 1) {
+
 			if (getState() != 1) {
 				setCurrentFrame(0);
 				setCharTexture(getCharVar()[getSelectedCharacter()][0]);
@@ -87,7 +88,9 @@ int Enemy::changeState(sf::Vector2f& playerPos, Character* player) {
 				setState(1);
 			}
 		}
-		if (player->getState() == 1 && getState()!=1) {
+
+		if (player->getState() == 1 && getState() != 1) {
+
 			setHealth(getHealth() - 5);
 			std::cout << "health of enemy: " << getHealth() << std::endl;
 			if (getState() != 3) {
@@ -103,4 +106,5 @@ int Enemy::changeState(sf::Vector2f& playerPos, Character* player) {
 
 	
 }
+
 

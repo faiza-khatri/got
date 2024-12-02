@@ -25,19 +25,19 @@ int main() {
 
     // Main loop
     while (window.isOpen()) {
-       sf::Event event;
-       while (window.pollEvent(event)) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
-              window.close();
-          }
+                window.close();
+            }
             game.handleInput(window);
         }
 
-       
-       window.clear(sf::Color::Black);
-       game.renderScreen(window);
 
-       window.display();
+        window.clear(sf::Color::Black);
+        game.renderScreen(window);
+
+        window.display();
 
     }
 

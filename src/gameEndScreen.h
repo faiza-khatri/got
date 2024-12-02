@@ -13,11 +13,14 @@ public:
     int handleInput(sf::RenderWindow&) override;
 private:
     sf::Sprite gameOverSprite;
+    sf::Sprite youWon;
     sf::RectangleShape playAgainButton;
     sf::Texture gameOverTexture;
+    sf::Texture youWonTexture;
     sf::Texture playAgainTexture;
     sf::SoundBuffer clickBuffer;
     sf::Sound clickSound;
+    bool won;
 };
 
 

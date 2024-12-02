@@ -1,3 +1,4 @@
+
 #include "game.h"
 
 void Game::setCurrentState(int state) {
@@ -9,7 +10,7 @@ int Game::getCurrentState() {
 }
 
 
-int Game::getPlayerSelected(){
+int Game::getPlayerSelected() {
 	return playerSelected;
 }
 
@@ -50,6 +51,7 @@ void Game::handleInput(sf::RenderWindow& window) {
 			screens.push_back(new CharacterSelectWindow(windowSize));
 		}
 		else if (currentState == 2) {
+			std::cout << "transiiton var" << trans << std::endl;
 			if (trans == 1) {
 				screens.push_back(new EndScreen(windowSize, 0));
 			}
@@ -69,7 +71,7 @@ void Game::handleInput(sf::RenderWindow& window) {
 		currentScreen = screens[currentState];
 		Game::intializeComponents(windowSize);
 	}
-	
+
 }
 
 void Game::renderScreen(sf::RenderWindow& wind) {
@@ -93,4 +95,6 @@ Game::~Game() {
 	for (BaseWindow* temp : screens) {
 		delete temp;
 	};
+
 }
+
