@@ -12,7 +12,7 @@ public:
 	/*void attack() override;
 	void defend() override;*/
 	/*void loadCharVarTextures() override;*/
-	void changeState(sf::Vector2f&, Character*) override;
+	int changeState(sf::Vector2f&, Character*) override;
 };
 
 

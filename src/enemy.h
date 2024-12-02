@@ -17,7 +17,7 @@ class Enemy : public Character {
 public:
 	Enemy(int hlth, int spd, int attackPwr, std::string nme, int pl);
 
-	void changeState(sf::Vector2f&, Character* player) override;
+	int changeState(sf::Vector2f&, Character* player) override;
 };
 
 

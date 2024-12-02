@@ -28,9 +28,13 @@ public:
     int handleInput(sf::RenderWindow&);
     void operator=(const FightWindow*);
     ~FightWindow();
+    void updateLifeBar(float damage);
+    sf::RectangleShape lifeBarOutline;
 private:
     Player* p1;
     Enemy* enemy;
+    sf::RectangleShape lifeBar;                            // Rectangle for the life bar
+    sf::Clock clock;
 
     
 };
