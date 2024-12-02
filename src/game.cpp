@@ -24,8 +24,8 @@ Game::Game(sf::Vector2u& windowSize) {
 
 	screens.push_back(new StartScreen(windowSize));
 	currentScreen = screens[currentState];
-	playerSelected = 1;
-	playerSelected2 = 1;
+	playerSelected = 0;
+	playerSelected2 = 0;
 	currentScreen->initializeComponents(windowSize, playerSelected, playerSelected2);
 	
 }

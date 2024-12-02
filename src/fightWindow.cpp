@@ -4,11 +4,15 @@
 #include <filesystem>
 
 FightWindow::FightWindow(sf::Vector2u& windowSize, int pl, int pl2) {
+
+    // make players
     p1 = new Player(100, 10, 20, "danaerys", pl, 0);
 
     changeActiveStatus(0);
     p2 = new Player(100, 10, 20, "danaerys", pl2, 1);
 
+
+    // player 1 life bar
     lifeBar.setSize(sf::Vector2f(200, 20));
     lifeBar.setFillColor(sf::Color::Green);
     lifeBar.setPosition(10, 10); 
@@ -19,6 +23,8 @@ FightWindow::FightWindow(sf::Vector2u& windowSize, int pl, int pl2) {
     lifeBarOutline.setOutlineThickness(2);
     lifeBarOutline.setPosition(lifeBar.getPosition().x - 1, lifeBar.getPosition().y - 1);
 
+
+    // player 2 life bar
     enemyLifeBar.setSize(sf::Vector2f(200, 20));
     enemyLifeBar.setFillColor(sf::Color::Green);
     enemyLifeBar.setPosition(windowSize.x - enemyLifeBar.getSize().x - 10, 10);
@@ -35,6 +41,8 @@ FightWindow::FightWindow(sf::Vector2u& windowSize, int pl, int pl2) {
     playerCurrentWidth = 200.0f;
     enemyCurrentWidth = 200.0f;
 
+
+    // controls description sprite
     controls = sf::Sprite();
 
     
@@ -57,6 +65,7 @@ FightWindow::FightWindow(sf::Vector2u& windowSize, int pl, int pl2) {
 
 void FightWindow::initializeComponents(sf::Vector2u&, int playerSelected, int playerSelected2) {
     
+    // set players according to global selected players
     setSelectedPlayerId1(playerSelected);
     setSelectedPlayerId2(playerSelected2);
     std::string s = "brienne";
@@ -106,7 +115,6 @@ void FightWindow::animateByState(Character* pl) {
         break;
     case 6:
         pl->animate(false, character, character == "jonsnow" ? 4 : 3, 7); // dead
-        /*p1->alive = false;*/
         break;
     }
 

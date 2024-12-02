@@ -200,7 +200,7 @@ int CharacterSelectWindow::handleInput(sf::RenderWindow& wind) {
             }
         }
 
-
+        // if select button, start the game - ready to move to next stage
         if (selectButtonSprite.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
             return 1;
         }
@@ -209,6 +209,7 @@ int CharacterSelectWindow::handleInput(sf::RenderWindow& wind) {
 }
 
 void CharacterSelectWindow::operator=(const CharacterSelectWindow* other) {
+    // copy constructor
     this->selectedPlayerId1 = other->selectedPlayerId1;
     this->selectedPlayerId2 = other->selectedPlayerId2;
     this->selectedCharacterSprite = other->selectedCharacterSprite;
