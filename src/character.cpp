@@ -55,11 +55,7 @@ void Character::animate(bool flip, std::string& charAnimated, int numFrames, int
 		
 	}
 
-	//float actframeWidth = facingRight ? frameWidth : -frameWidth;
-
-
 	if (elapsedTime >= frameDuration) {
-		/*std::cout << selectedCharacter << ": " << idx << std::endl;*/
 		elapsedTime = 0.0f;
 		
 		sprite.setTextureRect(sf::IntRect(currentFrame * frameWidth, 0, frameWidth, frameHeight));
@@ -73,22 +69,21 @@ void Character::animate(bool flip, std::string& charAnimated, int numFrames, int
 
 
 void Character::move(int dir, Character* chr) {
-	float speed = 900.0f;    // Movement speed
-	float deltaTime = 0.03f;  // Approx. frame time for 60 FPS
-	float safetyDistance = 70.0f;  // Minimum allowed distance between characters
+	// distance = speed * time
+	float speed = 900.0f;    
+	float deltaTime = 0.03f;  
+	float safetyDistance = 70.0f;  
 
 	// Calculate new position
 	float newPos = sprite.getPosition().x + (dir * speed * deltaTime);
 	float otherPos = chr->getSprite().getPosition().x;
 
-	// Adjusted boundary check considering the sprite's width and height
+	// boundary check 
 	sf::FloatRect bounds = sprite.getGlobalBounds();
 	float halfWidth = bounds.width / 2.0f;
 
-	// Ensure movement maintains at least safetyDistance
 	bool safeDistanceMaintained = abs(otherPos - newPos) >= safetyDistance;
 
-	// Check boundaries (the sprite's center should stay within the window's width)
 	bool withinBounds = (newPos - halfWidth >= 0 && newPos + halfWidth <= 800);
 
 	if (withinBounds && safeDistanceMaintained) {

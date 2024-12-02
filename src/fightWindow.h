@@ -14,14 +14,12 @@
 #include <SFML/Window/Mouse.hpp>
 
 #include "player.h"
-#include "enemy.h"
+
 //#include "game.h"
 
 
-// character selection window and other initial operations
 class FightWindow : public BaseWindow, public sf::RenderWindow {
 public:
-    /*FightWindow();*/
     FightWindow(sf::Vector2u& windowSize, int, int);
     void initializeComponents(sf::Vector2u&, int, int) override;
     void renderScreen(sf::RenderWindow& window) override;
@@ -35,7 +33,6 @@ public:
 private:
     Player* p1;
     Player* p2;
-   /* Enemy* enemy;*/
     float playerCurrentWidth; 
     float enemyCurrentWidth;
     sf::RectangleShape lifeBar;                           

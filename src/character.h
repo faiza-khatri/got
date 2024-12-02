@@ -33,15 +33,10 @@ private:
 	bool alive = true;
 
 public:
-	//Character(int hlth, int attackPwr, int spd, int st, sf::Sprite& sprt);
-	/*void attack(bool flip);
-	void defend(bool flip);*/
-	/*void idle(bool flip);*/
-	//int virtual changeState(sf::Vector2f&, Character*) = 0; // calls attack, defend etc
+	
 	void move(int, Character*); // -1 for left, 1 for right
 	void animate(bool flip, std::string&, int, int);
 
-	/*void updateState(bool);*/
 	void loadCharVarTextures(std::string&);
 	void drawChar(sf::RenderWindow& window);
 

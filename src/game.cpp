@@ -20,20 +20,14 @@ void Game::setPlayerSelected(int pl) {
 
 Game::Game(sf::Vector2u& windowSize) {
 	currentState = 0;
-	/*Game::characterSelectScreen =  new CharacterSelectWindow(windowSize);
-	Game::startScreen = new StartScreen(windowSize);
-	Game::fightScreen = new FightWindow(windowSize);*/
-	/*Game::currentScreen = new StartScreen(windowSize);;*/
-	/*screens[0] = startScreen;
-	screens[1] = characterSelectScreen;
-	screens[2] = fightScreen;*/
+	
 
 	screens.push_back(new StartScreen(windowSize));
 	currentScreen = screens[currentState];
 	playerSelected = 1;
 	playerSelected2 = 1;
 	currentScreen->initializeComponents(windowSize, playerSelected, playerSelected2);
-	/*this->window = wind;*/
+	
 }
 
 void Game::intializeComponents(sf::Vector2u& windowSize) {
@@ -95,9 +89,7 @@ BaseWindow* Game::getCurrentScreen() {
 }
 
 Game::~Game() {
-	/*delete startScreen;
-	delete characterSelectScreen;
-	delete fightScreen;*/
+
 	for (BaseWindow* temp : screens) {
 		delete temp;
 	};

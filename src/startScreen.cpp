@@ -16,7 +16,7 @@ void StartScreen::loadBgTextures() {
         numBgs = 0;
         for (const auto& entry : std::filesystem::directory_iterator(std::filesystem::current_path().
             parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\backgrounds")) {
-            /*if (entry.is_regular_file() && entry.path().extension() == ".png") {*/
+
                 sf::Texture texture;
                 if (texture.loadFromFile(entry.path().string())) {
                     bgMap[numBgs++] = texture;
@@ -25,7 +25,7 @@ void StartScreen::loadBgTextures() {
                 else {
                     std::cerr << "Failed to load texture: " << entry.path().filename().string() << std::endl;
                 }
-            //}
+
         }
     }
     catch (const std::exception& e) {

@@ -26,7 +26,6 @@ public:
 	// returns the texture given filename of the texture
 	sf::Texture& getTextures(std::string&);
 
-	/*virtual void operator=(const BaseWindow*) = 0;*/
 
 	void changeActiveStatus(bool);
 	void setSelectedPlayerId1(int);
@@ -41,7 +40,6 @@ public:
 	bool getActiveStatus();
 	int selectedPlayerId1 = 1;
 	int selectedPlayerId2 = 1;
-	/*sf::Sprite& getCurrBg();*/
 	
 
 	// setters
@@ -49,10 +47,6 @@ public:
 	void setFont(const sf::Font&);
 	void setTextures(const std::map<std::string, sf::Texture>&);
 	void setTextureElement(const std::string&, const sf::Texture&);
-	/*void setCurrBg(sf::Sprite& );*/
-
-
-	
 
 
 private:
@@ -60,7 +54,6 @@ private:
 	sf::Font font;
 	std::map<std::string, sf::Texture> textures;
 	bool active = 0;
-	/*sf::Sprite currBg;*/
 
 };
 

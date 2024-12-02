@@ -17,7 +17,7 @@ CharacterSelectWindow::CharacterSelectWindow(sf::Vector2u& windowSize) {
     p2 = new Player(100, 10, 20, "danaerys", 0, 1);
 
     // populates characterlist
-   /* initializeComponents(windowSize);*/
+
     std::string clickSoundPath = std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\sounds\\click.wav";
     if (!clickBuffer.loadFromFile(clickSoundPath)) {
         std::cerr << "Error: Unable to load click sound!" << std::endl;
@@ -68,14 +68,6 @@ void CharacterSelectWindow::initializeComponents(sf::Vector2u&, int playerSelect
             characterList2[characterIntroId] = sprite2;
             characterIntroId++;
         }
-        /*else {
-            float scaleX = static_cast<float>(INTRO_WIDTH) / texture.getSize().x;
-            float scaleY = static_cast<float>(INTRO_HEIGHT) / texture.getSize().y;
-            sprite.setScale(scaleX, scaleY);
-
-            sprite.setPosition(5, 20);
-            character[characterId++] = sprite;
-        }*/
     }
 
     if (!selectButtonTexture.loadFromFile(std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\characterIntros\\sel.png")) {
@@ -153,8 +145,6 @@ void CharacterSelectWindow::renderScreen(sf::RenderWindow& wind) {
     }
 
 
-
-    //  "Select" button
     wind.draw(selectButtonSprite);
 }
 
@@ -188,7 +178,6 @@ int CharacterSelectWindow::handleInput(sf::RenderWindow& wind) {
         }
 
 
-        // Check if "Select" button is clicked
         if (selectButtonSprite.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
             return 1;
         }
@@ -200,13 +189,13 @@ void CharacterSelectWindow::operator=(const CharacterSelectWindow* other) {
     this->selectedPlayerId1 = other->selectedPlayerId1;
     this->selectedPlayerId2 = other->selectedPlayerId2;
     this->selectedCharacterSprite = other->selectedCharacterSprite;
-    this->characterDetailsText = other->characterDetailsText;      // Text to show character details
-    this->selectButton = other->selectButton;    // Button for final selection
+    this->characterDetailsText = other->characterDetailsText;     
+    this->selectButton = other->selectButton;    
     this->PORTRAIT_WIDTH = other->PORTRAIT_WIDTH;
     this->PORTRAIT_HEIGHT = other->PORTRAIT_HEIGHT;
     this->INTRO_WIDTH = other->INTRO_WIDTH;
     this->INTRO_HEIGHT = other->INTRO_HEIGHT;
-    this->isCharacterSelected = other->isCharacterSelected;   // Tracks whether a character is selected
+    this->isCharacterSelected = other->isCharacterSelected;   
     this->gameNameText = other->gameNameText;
     this->gameNameTestBg = other->gameNameTestBg;
     this->characterList = other->characterList;
@@ -216,6 +205,7 @@ void CharacterSelectWindow::operator=(const CharacterSelectWindow* other) {
 
 
 CharacterSelectWindow::~CharacterSelectWindow() {
+    // mem management
     delete p1;
     delete p2;
 }

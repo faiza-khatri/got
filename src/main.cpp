@@ -1,7 +1,5 @@
 #include <SFML/Graphics.hpp>
-//#include "characterSelectWindow.h"
-//#include "startScreen.h"
-//#include "fightWindow.h"
+
 
 #include "game.h"
 
@@ -9,12 +7,7 @@
 #include <filesystem>
 
 int main() {
-    //Game game;
-    //// Create an instance of CharacterSelectWindow
-    //sf::Vector2u windowSize = { 800, 600 };
-    //CharacterSelectWindow characterSelectWindow(windowSize);
-    //StartScreen startScreen(windowSize);
-    //FightWindow fightWindow(windowSize, game);
+    
     sf::RenderWindow window(sf::VideoMode(800, 600), "Game");
 
     // Set the window size and title

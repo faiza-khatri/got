@@ -35,7 +35,7 @@ private:
 	
 
 public:
-	/*CharacterSelectWindow();*/
+
 	CharacterSelectWindow(sf::Vector2u& windowSize);
 	~CharacterSelectWindow();
 	void operator=(const CharacterSelectWindow*);
@@ -45,7 +45,7 @@ public:
 	void renderScreen(sf::RenderWindow&) override;
 
 
-	// Handle mouse and keyboard input
+	// mouse and keyboard input
 	int handleInput(sf::RenderWindow&) override;
 
 
@@ -54,7 +54,7 @@ public:
 	sf::Texture selectButtonTexture;
 
 	sf::SoundBuffer clickBuffer;             // click sound
-	sf::Sound clickSound;                    // Click sound
+	sf::Sound clickSound;                    // click sound
 
 };
 
