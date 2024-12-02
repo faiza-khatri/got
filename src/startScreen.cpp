@@ -68,6 +68,7 @@ int StartScreen::handleInput(sf::RenderWindow& wind) {
             backgroundMusic.stop();
             wind.close();
         }
+
     }
     return 0;
 }

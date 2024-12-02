@@ -26,17 +26,19 @@ private:
 	int currentFrame;     // Index of the current frame
 	int totalFrames = 0;      // Total frames in the animation
 	sf::Texture charTexture;
-	std::map<std::string, std::array<sf::Texture, 3>> charVars;
+	std::map<std::string, std::array<sf::Texture, 5>> charVars;
 	std::string selectedCharacter;
+	sf::Vector2f position;
+	bool facingRight;
 
 public:
 	//Character(int hlth, int attackPwr, int spd, int st, sf::Sprite& sprt);
 	/*void attack(bool flip);
 	void defend(bool flip);*/
 	/*void idle(bool flip);*/
-	void virtual changeState() = 0; // calls attack, defend etc
-	void move(int); // -1 for left, 1 for right
-	void animate(bool flip);
+	int virtual changeState(sf::Vector2f&, Character*) = 0; // calls attack, defend etc
+	void move(int, Character*); // -1 for left, 1 for right
+	void animate(bool flip, std::string&);
 	/*void updateState(bool);*/
 	void loadCharVarTextures(std::string&);
 	void drawChar(sf::RenderWindow& window);
@@ -71,8 +73,8 @@ public:
 	sf::Texture& getTexture();
 	void setTexture(sf::Texture&);
 
-	void setCharVar(std::map<std::string, std::array<sf::Texture, 3>>&);
-	std::map<std::string, std::array<sf::Texture, 3>>& getCharVar();
+	void setCharVar(std::map<std::string, std::array<sf::Texture, 5>>&);
+	std::map<std::string, std::array<sf::Texture, 5>>& getCharVar();
 
 	sf::Clock& getAnimationClock();
 	void setAnimationClock(sf::Clock& clk);
@@ -80,6 +82,13 @@ public:
 	sf::Texture& getCharTexture();
 
 	void setCharTexture(sf::Texture&);
+
+	sf::Vector2f getPosition();
+	void setPosition(sf::Vector2f&);
+
+	bool isFacingRight();
+	void setFacingRight(bool);
+	void changeDirection();
 
 	virtual ~Character() = 0;
 

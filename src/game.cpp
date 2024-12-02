@@ -94,4 +94,6 @@ Game::~Game() {
 	for (BaseWindow* temp : screens) {
 		delete temp;
 	};
+
 }
+
