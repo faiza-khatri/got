@@ -50,6 +50,7 @@ void Game::handleInput(sf::RenderWindow& window) {
 			screens.push_back(new CharacterSelectWindow(windowSize));
 		}
 		else if (currentState == 2) {
+			std::cout << "transiiton var" << trans << std::endl;
 			if (trans == 1) {
 				screens.push_back(new EndScreen(windowSize, 0));
 			}
