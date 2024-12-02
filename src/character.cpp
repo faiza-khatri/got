@@ -45,6 +45,10 @@ void Character::animate(bool flip, std::string& charAnimated, int numFrames, int
 
 
 	if (currentFrame >= numFrames) {
+		if (idx == 7) {
+			die();
+			return;
+		}
 		sprite.setTexture(charVars[selectedCharacter][2]);
 		currentFrame = 0;
 		state = 0;
@@ -57,6 +61,7 @@ void Character::animate(bool flip, std::string& charAnimated, int numFrames, int
 	if (elapsedTime >= frameDuration) {
 		/*std::cout << selectedCharacter << ": " << idx << std::endl;*/
 		elapsedTime = 0.0f;
+		
 		sprite.setTextureRect(sf::IntRect(currentFrame * frameWidth, 0, frameWidth, frameHeight));
 		currentFrame = (currentFrame + 1);
 		
@@ -76,11 +81,15 @@ void Character::move(int dir, Character* chr) {
 	float newPos = sprite.getPosition().x + (dir * speed * deltaTime);
 	float otherPos = chr->getSprite().getPosition().x;
 
-	// Boundary check
-	bool withinBounds = (newPos > 0 && newPos < 800);
+	// Adjusted boundary check considering the sprite's width and height
+	sf::FloatRect bounds = sprite.getGlobalBounds();
+	float halfWidth = bounds.width / 2.0f;
 
 	// Ensure movement maintains at least safetyDistance
 	bool safeDistanceMaintained = abs(otherPos - newPos) >= safetyDistance;
+
+	// Check boundaries (the sprite's center should stay within the window's width)
+	bool withinBounds = (newPos - halfWidth >= 0 && newPos + halfWidth <= 800);
 
 	if (withinBounds && safeDistanceMaintained) {
 		sprite.move(dir * speed * deltaTime, 0.0f);
@@ -91,6 +100,7 @@ void Character::move(int dir, Character* chr) {
 			<< ", Other position: " << otherPos << std::endl;
 	}
 }
+
 
 
 
@@ -237,6 +247,13 @@ void Character::changeDirection() {
 	sprite.setPosition(currentPosition.x, currentPosition.y);
 	
 
+}
+
+bool Character::isAlive() {
+	return alive;
+}
+void Character::die() {
+	alive = false;
 }
 
 Character::~Character() {

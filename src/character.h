@@ -30,6 +30,7 @@ private:
 	std::string selectedCharacter;
 	sf::Vector2f position;
 	bool facingRight;
+	bool alive = true;
 
 public:
 	//Character(int hlth, int attackPwr, int spd, int st, sf::Sprite& sprt);
@@ -92,6 +93,9 @@ public:
 	void changeDirection();
 
 	virtual ~Character() = 0;
+
+	bool isAlive();
+	void die();
 
 
 

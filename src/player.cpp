@@ -174,3 +174,10 @@ int Player::changeState(sf::Vector2f&, Character* enemy,
 
 	return 0;
 }
+
+void Player::stateUpdate(int idx, int setSt) {
+	setCurrentFrame(0);
+	setCharTexture(getCharVar()[getSelectedCharacter()][idx]);
+	getSprite().setTexture(getCharTexture());
+	setState(setSt);
+}

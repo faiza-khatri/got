@@ -17,6 +17,8 @@ public:
 		sf::Keyboard::Key, sf::Keyboard::Key,
 		sf::Keyboard::Key, sf::Keyboard::Key,
 		sf::Keyboard::Key, sf::Keyboard::Key);
+	void stateUpdate(int idx, int setState);
+	/*bool alive = true;*/
 };
 
 

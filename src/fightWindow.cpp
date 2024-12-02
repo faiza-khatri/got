@@ -84,7 +84,12 @@ void FightWindow::animateByState(Character* pl) {
     case 5:
         pl->animate(false, character, character == "danaerys" ? 3 : 4, 6); // attack2
         break;
+    case 6:
+        pl->animate(false, character, character == "jonsnow" ? 4 : 3, 7); // dead
+        /*p1->alive = false;*/
+        break;
     }
+
 }
 
 void FightWindow::renderScreen(sf::RenderWindow& window) {
@@ -126,10 +131,25 @@ int FightWindow::handleInput(sf::RenderWindow&) {
     }
 
     if (p1->getHealth() <= 0) {
+        p1->stateUpdate(7, 6);
+        /*if (p1->getState()==0 {
+            return 1;
+        }*/
+        /*return 1;*/
+        
+    }
+    if (p2->getHealth() <=  0) {
+        p2->stateUpdate(7, 6);
+        
+    }
+
+   
+
+    if (!p1->isAlive()) {
         return 1;
     }
-    if (p2->getHealth() <= 0) {
-        return 2; 
+    else if (!p2->isAlive()) {
+        return 2;
     }
 
     return 0; 
