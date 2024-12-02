@@ -3,74 +3,60 @@
 #include <filesystem>
 #include <iostream>
 
-
 EndScreen::EndScreen(sf::Vector2u& windowSize, bool wn) {
-	loadTextures(std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\end_scrn");
-	changeActiveStatus(0);
-	//std::cout << "Player won: " << wn << std::endl;
     this->won = wn ? 1 : 0;
-   /* std::cout << "won: " << won << std::endl;*/
+    changeActiveStatus(0);
 
+    std::cout << "Player won: " << (this->won ? "Player 1" : "Player 2") << std::endl;
 }
 
 void EndScreen::initializeComponents(sf::Vector2u& windowSize, int playerSelected, int pl2) {
-    if (!gameOverTexture.loadFromFile(std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\end_scrn\\gameover.png")) {
-        std::cerr << "Error: Unable to load game over image!" << std::endl;
-    }
-    gameOverSprite.setTexture(gameOverTexture);
+    std::string winnerImage = this->won == 1 ? "player1win.png" : "player2win.png";
+    std::string fullPath = std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\end_scrn\\" + winnerImage;
 
-    float scaleX = static_cast<float>(windowSize.x) / gameOverTexture.getSize().x;
-    float scaleY = static_cast<float>(windowSize.y) / gameOverTexture.getSize().y;
-    gameOverSprite.setScale(scaleX, scaleY);
-    gameOverSprite.setPosition(0, 0);
+    std::cout << "Attempting to load: " << fullPath << std::endl;
 
-    if (!youWonTexture.loadFromFile(std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\end_scrn\\win.png")) {
-        std::cerr << "Error: Unable to load game over image!" << std::endl;
+    if (!youWonTexture.loadFromFile(fullPath)) {
+        std::cerr << "Error: Unable to load winner image: " << winnerImage << std::endl;
     }
     youWon.setTexture(youWonTexture);
 
-    float scaleX2 = static_cast<float>(windowSize.x) / youWonTexture.getSize().x;
-    float scaleY2 = static_cast<float>(windowSize.y) / youWonTexture.getSize().y;
-    youWon.setScale(scaleX2, scaleY2);
+    float scaleX = static_cast<float>(windowSize.x) / youWonTexture.getSize().x;
+    float scaleY = static_cast<float>(windowSize.y) / youWonTexture.getSize().y;
+    youWon.setScale(scaleX, scaleY);
     youWon.setPosition(0, 0);
 
-    // play again button
-    if (!playAgainTexture.loadFromFile(std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\end_scrn\\gobu.png")) {
+    // Load the play again button texture
+    std::string playAgainPath = std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\end_scrn\\gobu.png";
+
+    if (!playAgainTexture.loadFromFile(playAgainPath)) {
         std::cerr << "Error: Unable to load play again button texture!" << std::endl;
     }
+
     playAgainButton.setSize(sf::Vector2f(273.0f, 205.0f));
     playAgainButton.setTexture(&playAgainTexture);
-
     playAgainButton.setPosition(
         static_cast<float>(windowSize.x) / 2 - 273.0f / 2,
         static_cast<float>(windowSize.y) * 0.75f - 205.0f / 2
     );
-
 }
 
 void EndScreen::renderScreen(sf::RenderWindow& wind) {
- /*   std::cout << "won: " << won << std::endl;*/
-    wind.draw(getBgSprite());
-    if (this->won) {
-        wind.draw(youWon);
-    }
-    else {
-        wind.draw(gameOverSprite);
+    // Render the winner's texture
+    wind.draw(youWon);
 
-    }
+    // Render the play again button
     wind.draw(playAgainButton);
 }
 
 int EndScreen::handleInput(sf::RenderWindow& wind) {
-
     sf::Vector2i mousePos = sf::Mouse::getPosition(wind);
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
         if (playAgainButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
-            clickSound.play();  //  click sound
+            clickSound.play();  // Play click sound
             return 1;
         }
     }
     return 0;
-
 }
