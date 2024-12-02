@@ -72,7 +72,7 @@ Enemy::Enemy(int hlth, int spd, int attackPwr, std::string nme, int pl) {
 	phase = 0;
 }
 
-void Enemy::changeState(sf::Vector2f& playerPos, Character* player) {
+int Enemy::changeState(sf::Vector2f& playerPos, Character* player) {
 	// Calculate distance to the player
 	float distance = player->getSprite().getPosition().x - getSprite().getPosition().x;
 	
@@ -96,8 +96,10 @@ void Enemy::changeState(sf::Vector2f& playerPos, Character* player) {
 				getSprite().setTexture(getCharTexture());
 				setState(3);
 			}
+			return 1;
 		}
 	}
+	return 0;
 
 	
 }

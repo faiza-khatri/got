@@ -36,7 +36,7 @@ public:
 	/*void attack(bool flip);
 	void defend(bool flip);*/
 	/*void idle(bool flip);*/
-	void virtual changeState(sf::Vector2f&, Character*) = 0; // calls attack, defend etc
+	int virtual changeState(sf::Vector2f&, Character*) = 0; // calls attack, defend etc
 	void move(int, Character*); // -1 for left, 1 for right
 	void animate(bool flip, std::string&);
 	/*void updateState(bool);*/

@@ -65,16 +65,9 @@ int StartScreen::handleInput(sf::RenderWindow& wind) {
             return 1;
         }
         else if (exitButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
-            /*if (game.getCurrentState() != -1) {
                 backgroundMusic.stop(); 
-            }
-        } else if (exitButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
-            if (game.getCurrentState() != -1) {
-                game.setCurrentState(-1);
                 wind.close();
-            }*/
-        }
-        ////////////// ADD HERE THE LOGIC OF CHANGE BACKGROUND THE STATE CHANGES TO 2 /////////////////////////
+        } 
     }
     return 0;
 }

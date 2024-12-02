@@ -44,7 +44,6 @@ void Game::handleInput(sf::RenderWindow& window) {
 	if (trans) {
 		if (currentState == 1) {
 			playerSelected = currentScreen->getSelectedPlayerId();
-			/*std::cout << "selected player id from actual game: " << currentScreen->getSelectedPlayerId() << std::endl;*/
 			screens.push_back(new FightWindow(windowSize, playerSelected));
 		}
 		else if (currentState == 0) {
@@ -57,6 +56,14 @@ void Game::handleInput(sf::RenderWindow& window) {
 			else if (trans == 2) {
 				screens.push_back(new EndScreen(windowSize, 1));
 			}
+		}
+		else if (currentState == 3) {
+			for (BaseWindow* temp : screens) {
+				delete temp;
+			};
+			screens.clear();
+			screens.push_back(new StartScreen(windowSize));
+			currentState = -1;
 		}
 		currentState += 1;
 		currentScreen = screens[currentState];

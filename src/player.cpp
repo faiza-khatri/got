@@ -79,7 +79,7 @@ Player::Player(int hlth, int spd, int attackPwr, std::string nm, int pl) {
 }
 
 
-void Player::changeState(sf::Vector2f&, Character* enemy) {
+int Player::changeState(sf::Vector2f&, Character* enemy) {
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
 		if (getState() != 1) {
@@ -130,7 +130,7 @@ void Player::changeState(sf::Vector2f&, Character* enemy) {
 	float distance = getSprite().getPosition().x - enemy->getSprite().getPosition().x;
 
 	if (abs(distance) < 180.0f) {
-		if (getState() != 1 && enemy->getState() == 1) {
+		if (getState() != -1 && getState() != 1 && enemy->getState() == 1) {
 			setHealth(getHealth() - 5);
 			std::cout << "health of player: " << getHealth() << std::endl;
 			if (getState() != 3) {
@@ -139,8 +139,10 @@ void Player::changeState(sf::Vector2f&, Character* enemy) {
 				getSprite().setTexture(getCharTexture());
 				setState(3);
 			}
+			return 1;
 		}
+		
 	}
-	
+	return 0;
 
 }
