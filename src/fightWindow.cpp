@@ -2,12 +2,13 @@
 
 FightWindow::FightWindow(sf::Vector2u& windowSize, int pl) {
     p1 = new Player(100, 10, 20, "danaerys", pl);
+
     changeActiveStatus(0);
     enemy = new Enemy(100, 10, 20, "white", 0);
 
     lifeBar.setSize(sf::Vector2f(200, 20));
     lifeBar.setFillColor(sf::Color::Green);
-    lifeBar.setPosition(10, 10); 
+    lifeBar.setPosition(10, 10);
 
     lifeBarOutline.setSize(sf::Vector2f(202, 22));
     lifeBarOutline.setFillColor(sf::Color::Transparent);
@@ -70,8 +71,12 @@ int FightWindow::handleInput(sf::RenderWindow&) {
     int damagePl = p1->changeState(p1->getPosition(), enemy);
     int damageEn = enemy->changeState(playerCenter, p1);
 
+    std::cout << "Player Health: " << p1->getHealth() << ", Damage to Player: " << damagePl << std::endl;
+    std::cout << "Enemy Health: " << enemy->getHealth() << ", Damage to Enemy: " << damageEn << std::endl;
+
     if (damagePl) {
         updateLifeBar(10.0f, lifeBar, playerCurrentWidth);
+        std::cout << "Updated Player Life Bar Width: " << playerCurrentWidth << std::endl;
     }
     if (damageEn) {
         updateLifeBar(10.0f, enemyLifeBar, enemyCurrentWidth);
@@ -81,11 +86,12 @@ int FightWindow::handleInput(sf::RenderWindow&) {
         return 1;
     }
     if (enemy->getHealth() <= 0) {
-        return 2; 
+        return 2;
     }
 
-    return 0; 
+    return 0;
 }
+
 
 void FightWindow::updateLifeBar(float damage, sf::RectangleShape& bar, float& currentWidth) {
     float maxWidth = 200.0f;
