@@ -122,6 +122,7 @@ void FightWindow::animateByState(Character* pl) {
 
 void FightWindow::renderScreen(sf::RenderWindow& window) {
     
+    // draw relevant details
     window.draw(getBgSprite());
     
 
@@ -146,6 +147,8 @@ int FightWindow::handleInput(sf::RenderWindow&) {
     sf::Vector2f playerCenter = sf::Vector2f(playerBounds.left + playerBounds.width / 2,
         playerBounds.top + playerBounds.height / 2);
 
+
+    // in case of damage to players
     int damagePl = p1->changeState(p1->getPosition(), p2, 
         sf::Keyboard::Q, sf::Keyboard::W, sf::Keyboard::E, sf::Keyboard::R,
         sf::Keyboard::S, sf::Keyboard::F, sf::Keyboard::A, sf::Keyboard::D);
@@ -160,16 +163,18 @@ int FightWindow::handleInput(sf::RenderWindow&) {
         updateLifeBar(10.0f, enemyLifeBar, enemyCurrentWidth);
     }
 
+    // if player should die now
     if (p1->getHealth() <= 0) {
-        p1->stateUpdate(7, 6);
+
+        p1->stateUpdate(7, 6); // die state
         
     }
     if (p2->getHealth() <=  0) {
-        p2->stateUpdate(7, 6);
+        p2->stateUpdate(7, 6); // die state
         
     }
 
-
+    // if player is dead
     if (!p1->isAlive()) {
         return 1;
     }
@@ -212,6 +217,7 @@ void FightWindow::operator=(const FightWindow* other) {
 }
 
 FightWindow::~FightWindow() {
+    // mem manage
     delete p1;
     delete p2;
 }

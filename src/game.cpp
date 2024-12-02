@@ -19,6 +19,7 @@ void Game::setPlayerSelected(int pl) {
 }
 
 Game::Game(sf::Vector2u& windowSize) {
+	// when game begins, start screen
 	currentState = 0;
 	
 
@@ -38,17 +39,20 @@ void Game::handleInput(sf::RenderWindow& window) {
 	sf::Vector2u windowSize = window.getSize();
 	int trans = currentScreen->handleInput(window);
 	if (trans) {
-		
+		// if on character select screen, go to fight screen
 		if (currentState == 1) {
 			playerSelected = currentScreen->getSelectedPlayerId1();
 			playerSelected2 = currentScreen->getSelectedPlayerId2();
 			screens.push_back(new FightWindow(windowSize, playerSelected, playerSelected2));
 		}
+		// if on start screen, go to character select screen
 		else if (currentState == 0) {
 			bg = currentScreen->getBgSprite();
 			screens.push_back(new CharacterSelectWindow(windowSize));
 		}
+		// if on fight screen, go to result screen
 		else if (currentState == 2) {
+			// trans is 1 if player 1 won, and 2 if player 2 won
 			std::cout << "transiiton var" << trans << std::endl;
 			if (trans == 1) {
 				screens.push_back(new EndScreen(windowSize, 0));
@@ -57,11 +61,14 @@ void Game::handleInput(sf::RenderWindow& window) {
 				screens.push_back(new EndScreen(windowSize, 1));
 			}
 		}
+		// if on end screen and play again
 		else if (currentState == 3) {
+			// empty screens vector
 			for (BaseWindow* temp : screens) {
 				delete temp;
 			};
 			screens.clear();
+			// go back to start screen
 			screens.push_back(new StartScreen(windowSize));
 			currentState = -1;
 		}
@@ -89,7 +96,7 @@ BaseWindow* Game::getCurrentScreen() {
 }
 
 Game::~Game() {
-
+	// mem manage
 	for (BaseWindow* temp : screens) {
 		delete temp;
 	};

@@ -4,6 +4,7 @@
 #include <iostream>
 
 EndScreen::EndScreen(sf::Vector2u& windowSize, bool wn) {
+    // set won variable
     this->won = wn ? 1 : 0;
     changeActiveStatus(0);
 
@@ -11,6 +12,7 @@ EndScreen::EndScreen(sf::Vector2u& windowSize, bool wn) {
 }
 
 void EndScreen::initializeComponents(sf::Vector2u& windowSize, int playerSelected, int pl2) {
+    // get appropriate winner image
     std::string winnerImage = this->won == 1 ? "player1win.png" : "player2win.png";
     std::string fullPath = std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\end_scrn\\" + winnerImage;
 
@@ -47,6 +49,7 @@ void EndScreen::renderScreen(sf::RenderWindow& wind) {
 }
 
 int EndScreen::handleInput(sf::RenderWindow& wind) {
+    // play again input handle
     sf::Vector2i mousePos = sf::Mouse::getPosition(wind);
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {

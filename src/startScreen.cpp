@@ -4,6 +4,7 @@
 
 
 StartScreen::StartScreen(sf::Vector2u& windowSize) {
+    // load all textures needed
     loadTextures(std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\start_scrn");
     loadBgTextures();
     changeActiveStatus(0);
@@ -12,6 +13,7 @@ StartScreen::StartScreen(sf::Vector2u& windowSize) {
 }
 
 void StartScreen::loadBgTextures() {
+    // load backgrounds
     try {
         numBgs = 0;
         for (const auto& entry : std::filesystem::directory_iterator(std::filesystem::current_path().
@@ -34,6 +36,7 @@ void StartScreen::loadBgTextures() {
 }
 
 void StartScreen::initializeComponents(sf::Vector2u& windowSize, int playerSelected, int pl2) {
+    // set buttons etc
     float buttonWidthFactor = 0.3f;
     float buttonWidth = windowSize.x * buttonWidthFactor;
 
@@ -85,17 +88,21 @@ void StartScreen::initializeComponents(sf::Vector2u& windowSize, int playerSelec
 }
 
 int StartScreen::handleInput(sf::RenderWindow& wind) {
+
     sf::Vector2i mousePos = sf::Mouse::getPosition(wind);
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
         clickSound.play();
         if (playButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
+            // if play, ready to move on to next screen
             return 1;
         }
         else if (exitButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
+            // if exit, close window
             backgroundMusic.stop();
             wind.close();
         }
         else if (changeBgButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
+            // if change background
             getBgSprite().setTexture(bgMap[currBg%numBgs]);
             currBg++;
         }

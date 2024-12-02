@@ -6,6 +6,8 @@
 #include <iostream>
 #include <filesystem>
 
+// game engine
+
 int main() {
     
     sf::RenderWindow window(sf::VideoMode(800, 600), "Game");

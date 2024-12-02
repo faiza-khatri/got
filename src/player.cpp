@@ -6,6 +6,8 @@
 
 
 Player::Player(int hlth, int spd, int attackPwr, std::string nm, int pl, int num) {
+
+	// initialize member vars with values
 	std::cout << "i called this constrcutor ..." << std::endl;
 	sf::Sprite player;
 
@@ -71,6 +73,8 @@ Player::Player(int hlth, int spd, int attackPwr, std::string nm, int pl, int num
 	setAnimationClock(clk);
 	setElapsedTime(0.0f);
 
+
+
 }
 
 
@@ -83,6 +87,7 @@ int Player::changeState(sf::Vector2f&, Character* enemy,
 	sf::Keyboard::Key turnRightKey,
 	sf::Keyboard::Key moveLeftKey,
 	sf::Keyboard::Key moveRightKey) {
+	// depending on key, decide state
 
 	if (sf::Keyboard::isKeyPressed(attack1Key)) {
 		if (getState() != 1) {
@@ -148,14 +153,17 @@ int Player::changeState(sf::Vector2f&, Character* enemy,
 		}
 	}
 
-
+	// check distance
 	float distance = getSprite().getPosition().x - enemy->getSprite().getPosition().x;
 
 	if (abs(distance) < 150.0f) {
+		// check they are facing each other
 		bool facingEachOther = (isFacingRight() && !enemy->isFacingRight()) || 
 			(!isFacingRight() && enemy->isFacingRight());
+		// if not defensive, and opponent does an offence
 		if (getState() != -1 && getState() != 1 && (enemy->getState() == 1 || 
 			enemy->getState() == 4 || enemy->getState() == 5) && facingEachOther ) {
+			// decrement health
 			setHealth(getHealth() - 5);
 			std::cout << "health of player: " << getHealth() << std::endl;
 			move(isFacingRight() ? -1 : 1, enemy);
@@ -176,6 +184,7 @@ int Player::changeState(sf::Vector2f&, Character* enemy,
 }
 
 void Player::stateUpdate(int idx, int setSt) {
+	// specifically for death
 	setCurrentFrame(0);
 	setCharTexture(getCharVar()[getSelectedCharacter()][idx]);
 	getSprite().setTexture(getCharTexture());

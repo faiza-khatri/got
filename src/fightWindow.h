@@ -15,6 +15,7 @@
 
 #include "player.h"
 
+// where fighting logic is defined
 
 
 class FightWindow : public BaseWindow, public sf::RenderWindow {
