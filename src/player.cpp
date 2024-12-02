@@ -125,22 +125,22 @@ int Player::changeState(sf::Vector2f&, Character* enemy) {
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)) {
 		if (isFacingRight()) {
 			changeDirection();
+		}
+	}
 
-			float distance = getSprite().getPosition().x - enemy->getSprite().getPosition().x;
 
-			if (abs(distance) < 180.0f) {
-				if (getState() != -1 && getState() != 1 && enemy->getState() == 1) {
-					setHealth(getHealth() - 5);
-					std::cout << "health of player: " << getHealth() << std::endl;
-					if (getState() != 3) {
-						setCurrentFrame(0);
-						setCharTexture(getCharVar()[getSelectedCharacter()][4]);
-						getSprite().setTexture(getCharTexture());
-						setState(3);
-					}
-					return 1;
+	float distance = getSprite().getPosition().x - enemy->getSprite().getPosition().x;
 
-				}
+	if (abs(distance) < 150.0f) {
+		if (getState() != -1 && getState() != 1 && enemy->getState() == 1) {
+			setHealth(getHealth() - 5);
+			std::cout << "health of player: " << getHealth() << std::endl;
+			if (getState() != 3) {
+				setCurrentFrame(0);
+				setCharTexture(getCharVar()[getSelectedCharacter()][4]);
+				getSprite().setTexture(getCharTexture());
+				setState(3);
+
 			}
 		}
 

@@ -18,6 +18,7 @@ public:
 	Enemy(int hlth, int spd, int attackPwr, std::string nme, int pl);
 
 	int changeState(sf::Vector2f&, Character* player) override;
+	void patrol();
 };
 
 
