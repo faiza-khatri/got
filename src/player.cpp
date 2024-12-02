@@ -6,76 +6,27 @@
 
 
 Player::Player(int hlth, int spd, int attackPwr, std::string nm, int pl) {
+	std::cout << "i called this constrcutor ..." << std::endl;
 	sf::Sprite player;
+	
+
 	setState(0); // defaut is idle
 	setHealth(hlth);
 	setSpeed(spd);
 	setAttackPower(attackPwr);
 	setSprite(player);
 	setName(nm);
-	/*std::string s = "danaerys";
+	std::string s;
 	if (pl == 0) {
-		s = "jonsnow";
-	}
-	else if (pl == 2) {
 		s = "brienne";
 	}
+	else if (pl == 2) {
+		s = "jonsnow";
+	}
+	else if (pl == 1) {
+		s = "danaerys";
+	}
 	
-	setSelectedCharacter(s);*/
-	setCurrentFrame(0);
-	std::string folderPath = std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\player";
-	loadCharVarTextures(folderPath);
-
-	std::string chrPlayer = getSelectedCharacter();
-
-	setCharTexture(getCharVar()[chrPlayer][2]);
-
-	player.setTexture(getCharTexture());
-
-	int frameWidth, frameHeight;
-	int numFrames;
-
-	if (chrPlayer == "jonsnow") {
-		frameWidth = 96;
-		frameHeight = 84;
-		player.setScale(8.0f, 8.0f);
-
-	}
-	else if (chrPlayer == "brienne") {
-		frameWidth = 64;
-		frameHeight = 80;
-		player.setScale(8.0f, 8.0f);
-	}
-	else {
-		frameWidth = 100;
-		frameHeight = 60;
-		player.setScale(5.0f, 5.0f);
-	}
-
-	player.setTextureRect(sf::IntRect(0, 0, frameWidth, frameHeight));
-
-	player.setPosition(60.0f, 100.0f);
-
-	setSprite(player);
-
-
-	sf::Clock clk;
-
-	setAnimationClock(clk);
-	setElapsedTime(0.0f);
-
-}
-
-Player::Player() {
-	sf::Sprite player;
-	setState(0); // defaut is idle
-	setHealth(100);
-	setSpeed(50);
-	setAttackPower(100);
-	setSprite(player);
-	std::string name = "john";
-	setName(name);
-	std::string s = "jonsnow";
 	setSelectedCharacter(s);
 	setCurrentFrame(0);
 	std::string folderPath = std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\player";
@@ -89,6 +40,7 @@ Player::Player() {
 
 	int frameWidth, frameHeight;
 	int numFrames;
+	player.setOrigin({ player.getLocalBounds().width / 2.0f, player.getLocalBounds().height });
 
 	if (chrPlayer == "jonsnow") {
 		frameWidth = 96;
@@ -97,19 +49,24 @@ Player::Player() {
 
 	}
 	else if (chrPlayer == "brienne") {
-		frameWidth = 64;
-		frameHeight = 80;
-		player.setScale(8.0f, 8.0f);
+		frameWidth = 128;
+		frameHeight = 128;
+		player.setScale(2.0f, 2.0f);
 	}
 	else {
-		frameWidth = 100;
-		frameHeight = 60;
-		player.setScale(5.0f, 5.0f);
+		frameWidth = 128;
+		frameHeight = 128;
+		player.setScale(2.0f, 2.0f);
 	}
 
 	player.setTextureRect(sf::IntRect(0, 0, frameWidth, frameHeight));
 
-	player.setPosition(200.0f, 100.0f);
+
+	player.setPosition(60.0f, 300.0f);
+	setFacingRight(1);
+
+	
+
 
 	setSprite(player);
 
@@ -118,9 +75,12 @@ Player::Player() {
 
 	setAnimationClock(clk);
 	setElapsedTime(0.0f);
+
 }
 
-void Player::changeState() {
+
+int Player::changeState(sf::Vector2f&, Character* enemy) {
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
 		if (getState() != 1) {
 			setCurrentFrame(0);
@@ -137,12 +97,52 @@ void Player::changeState() {
 			setState(-1);
 		}
 	}
-
-	/*else {
-		if (getState() != 0) {
-			setState(0);
+	 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+		move(1, enemy);
+		if (getState() != 2) {
 			setCurrentFrame(0);
+			setCharTexture(getCharVar()[getSelectedCharacter()][3]);
+			getSprite().setTexture(getCharTexture());
+			setState(2);
 		}
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+		move(-1, enemy);
+		if (getState() != 2) {
+			setCurrentFrame(0);
+			setCharTexture(getCharVar()[getSelectedCharacter()][3]);
+			getSprite().setTexture(getCharTexture());
+			setState(2);
+		}
+	}
 
-	}*/
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+		if (!isFacingRight()) {
+			changeDirection();
+		}
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)) {
+		if (isFacingRight()) {
+			changeDirection();
+		}
+	}
+
+	float distance = getSprite().getPosition().x - enemy->getSprite().getPosition().x;
+
+	if (abs(distance) < 180.0f) {
+		if (getState() != -1 && getState() != 1 && enemy->getState() == 1) {
+			setHealth(getHealth() - 5);
+			std::cout << "health of player: " << getHealth() << std::endl;
+			if (getState() != 3) {
+				setCurrentFrame(0);
+				setCharTexture(getCharVar()[getSelectedCharacter()][4]);
+				getSprite().setTexture(getCharTexture());
+				setState(3);
+			}
+			return 1;
+		}
+		
+	}
+	return 0;
+
 }

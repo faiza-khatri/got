@@ -6,17 +6,19 @@
 #include "startScreen.h"
 #include "characterSelectWindow.h"
 #include "fightWindow.h"
+#include "gameEndScreen.h"
 
 class Game {
 private:
 	int currentState;
 	/*sf::RenderWindow& window;*/
 	int playerSelected;
-	StartScreen* startScreen;
+	/*StartScreen* startScreen;
 	CharacterSelectWindow* characterSelectScreen;
-	FightWindow* fightScreen;
+	FightWindow* fightScreen;*/
 	BaseWindow* currentScreen;
-	std::map<int, BaseWindow*> screens;
+	std::vector<BaseWindow*> screens;
+	/*std::map<int, BaseWindow*> screens;*/
 
 public:
 	Game(sf::Vector2u&);
