@@ -1,11 +1,11 @@
 #include "fightWindow.h"
 #include <SFML/Window/Keyboard.hpp> 
 
-FightWindow::FightWindow(sf::Vector2u& windowSize, int pl) {
+FightWindow::FightWindow(sf::Vector2u& windowSize, int pl, int pl2) {
     p1 = new Player(100, 10, 20, "danaerys", pl, 0);
 
     changeActiveStatus(0);
-    p2 = new Player(100, 10, 20, "danaerys", pl, 1);
+    p2 = new Player(100, 10, 20, "danaerys", pl2, 1);
 
     lifeBar.setSize(sf::Vector2f(200, 20));
     lifeBar.setFillColor(sf::Color::Green);
@@ -36,8 +36,9 @@ FightWindow::FightWindow(sf::Vector2u& windowSize, int pl) {
     clock.restart();
 }
 
-void FightWindow::initializeComponents(sf::Vector2u&, int playerSelected) {
-    setSelectedPlayerId(playerSelected);
+void FightWindow::initializeComponents(sf::Vector2u&, int playerSelected, int playerSelected2) {
+    setSelectedPlayerId1(playerSelected);
+    setSelectedPlayerId2(playerSelected2);
     std::string s = "brienne";
     if (playerSelected == 2) {
         s = "jonsnow";
@@ -45,8 +46,15 @@ void FightWindow::initializeComponents(sf::Vector2u&, int playerSelected) {
     else if (playerSelected == 1) {
         s = "danaerys";
     }
+    std::string s2 = "brienne";
+    if (playerSelected2 == 2) {
+        s2 = "jonsnow";
+    }
+    else if (playerSelected2 == 1) {
+        s2 = "danaerys";
+    }
     p1->setSelectedCharacter(s);
-    p2->setSelectedCharacter(s);
+    p2->setSelectedCharacter(s2);
     p1->changeDirection();
     p1->changeDirection();
     p2->changeDirection();

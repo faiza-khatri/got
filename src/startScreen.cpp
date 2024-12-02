@@ -8,7 +8,7 @@ StartScreen::StartScreen(sf::Vector2u& windowSize) {
     changeActiveStatus(0);
 }
 
-void StartScreen::initializeComponents(sf::Vector2u& windowSize, int playerSelected) {
+void StartScreen::initializeComponents(sf::Vector2u& windowSize, int playerSelected, int pl2) {
     float buttonWidthFactor = 0.3f;
     float buttonWidth = windowSize.x * buttonWidthFactor;
 

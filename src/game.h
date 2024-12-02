@@ -13,6 +13,7 @@ private:
 	int currentState;
 	/*sf::RenderWindow& window;*/
 	int playerSelected;
+	int playerSelected2;
 	/*StartScreen* startScreen;
 	CharacterSelectWindow* characterSelectScreen;
 	FightWindow* fightScreen;*/

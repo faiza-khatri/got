@@ -60,7 +60,7 @@ Player::Player(int hlth, int spd, int attackPwr, std::string nm, int pl, int num
 		player.setPosition(600.0f, 300.0f);
 	}
 	else {
-		player.setPosition(60.0f, 300.0f);
+		player.setPosition(200.0f, 300.0f);
 	}
 
 	setSprite(player);

@@ -13,7 +13,7 @@ EndScreen::EndScreen(sf::Vector2u& windowSize, bool wn) {
 
 }
 
-void EndScreen::initializeComponents(sf::Vector2u& windowSize, int playerSelected) {
+void EndScreen::initializeComponents(sf::Vector2u& windowSize, int playerSelected, int pl2) {
     if (!gameOverTexture.loadFromFile(std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\end_scrn\\gameover.png")) {
         std::cerr << "Error: Unable to load game over image!" << std::endl;
     }

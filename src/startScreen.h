@@ -11,7 +11,7 @@ class StartScreen : public BaseWindow {
 public:
     /*StartScreen();*/
     StartScreen(sf::Vector2u& windowSize);
-    void initializeComponents(sf::Vector2u&, int) override;
+    void initializeComponents(sf::Vector2u&, int, int) override;
     void renderScreen(sf::RenderWindow& window) override;
     int handleInput(sf::RenderWindow&) override;
     void operator=(const StartScreen*);

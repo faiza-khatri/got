@@ -31,12 +31,13 @@ Game::Game(sf::Vector2u& windowSize) {
 	screens.push_back(new StartScreen(windowSize));
 	currentScreen = screens[currentState];
 	playerSelected = 1;
-	currentScreen->initializeComponents(windowSize, playerSelected);
+	playerSelected2 = 1;
+	currentScreen->initializeComponents(windowSize, playerSelected, playerSelected2);
 	/*this->window = wind;*/
 }
 
 void Game::intializeComponents(sf::Vector2u& windowSize) {
-	currentScreen->initializeComponents(windowSize, playerSelected);
+	currentScreen->initializeComponents(windowSize, playerSelected, playerSelected2);
 }
 
 void Game::handleInput(sf::RenderWindow& window) {
@@ -44,8 +45,9 @@ void Game::handleInput(sf::RenderWindow& window) {
 	int trans = currentScreen->handleInput(window);
 	if (trans) {
 		if (currentState == 1) {
-			playerSelected = currentScreen->getSelectedPlayerId();
-			screens.push_back(new FightWindow(windowSize, playerSelected));
+			playerSelected = currentScreen->getSelectedPlayerId1();
+			playerSelected2 = currentScreen->getSelectedPlayerId2();
+			screens.push_back(new FightWindow(windowSize, playerSelected, playerSelected2));
 		}
 		else if (currentState == 0) {
 			screens.push_back(new CharacterSelectWindow(windowSize));

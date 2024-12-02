@@ -19,7 +19,7 @@ public:
 	// pure virtual function to load textures
 	void loadTextures(std::string&);
 
-	virtual void initializeComponents(sf::Vector2u&, int playerSelected) = 0;
+	virtual void initializeComponents(sf::Vector2u&, int playerSelected, int) = 0;
 	virtual int handleInput(sf::RenderWindow&) = 0;
 	virtual void renderScreen(sf::RenderWindow&) = 0;         
 
@@ -29,15 +29,18 @@ public:
 	/*virtual void operator=(const BaseWindow*) = 0;*/
 
 	void changeActiveStatus(bool);
-	void setSelectedPlayerId(int);
-	int getSelectedPlayerId();
+	void setSelectedPlayerId1(int);
+	int getSelectedPlayerId1();
+	void setSelectedPlayerId2(int);
+	int getSelectedPlayerId2();
 
 	// getters
 	sf::Sprite& getBgSprite();
 	sf::Font& getFont();
 	std::map<std::string, sf::Texture>& getTextures();
 	bool getActiveStatus();
-	int selectedPlayerId = 1;
+	int selectedPlayerId1 = 1;
+	int selectedPlayerId2 = 1;
 	
 
 	// setters

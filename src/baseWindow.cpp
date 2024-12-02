@@ -72,9 +72,16 @@ void BaseWindow::changeActiveStatus(bool act) {
     active = act;
 }
 
-void BaseWindow::setSelectedPlayerId(int pl) {
-    selectedPlayerId = pl;
+void BaseWindow::setSelectedPlayerId1(int pl) {
+    selectedPlayerId1 = pl;
 }
-int BaseWindow::getSelectedPlayerId() {
-    return selectedPlayerId;
+int BaseWindow::getSelectedPlayerId1() {
+    return selectedPlayerId1;
+}
+
+void BaseWindow::setSelectedPlayerId2(int pl) {
+    selectedPlayerId2 = pl;
+}
+int BaseWindow::getSelectedPlayerId2() {
+    return selectedPlayerId2;
 }
