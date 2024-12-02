@@ -1,61 +1,46 @@
-#ifndef GAME_GUI
-#define GAME_GUI
+#ifndef BASE_WINDOW_H
+#define BASE_WINDOW_H
 
 #include <string>
-#include <vector>
 #include <map>
-
-#include <SFML/Graphics/Font.hpp>
-#include <SFML/Audio/Music.hpp>
-#include <SFML/Audio/Sound.hpp>
-#include <SFML/Graphics/Sprite.hpp>
-#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics.hpp>
 
 // Abstract class representing all windows of the game
-// inherits from RenderWinow, adds extra features
-
+// Inherits from sf::RenderWindow, adding extra features
 class BaseWindow {
 public:
-	// pure virtual function to load textures
-	void loadTextures(std::string&);
+    // Pure virtual functions to be implemented in derived classes
+    virtual void initializeComponents(sf::Vector2u& windowSize, int playerSelected) = 0;
+    virtual int handleInput(sf::RenderWindow& wind) = 0;
+    virtual void renderScreen(sf::RenderWindow& window) = 0;
+    void loadTextures(std::string&);
 
-	virtual void initializeComponents(sf::Vector2u&, int playerSelected) = 0;
-	virtual int handleInput(sf::RenderWindow&) = 0;
-	virtual void renderScreen(sf::RenderWindow&) = 0;         
+    // Getter function to retrieve a texture by filename
+    sf::Texture& getTextures(const std::string& fileName);
 
-	// returns the texture given filename of the texture
-	sf::Texture& getTextures(std::string&);
+    // Setters
+    void setBgSprite(const sf::Sprite& newBgSprite);
+    void setFont(const sf::Font& newFont);
+    void setTextures(const std::map<std::string, sf::Texture>& newTextures);
+    void setTextureElement(const std::string& fileName, const sf::Texture& texture);
 
-	/*virtual void operator=(const BaseWindow*) = 0;*/
-
-	void changeActiveStatus(bool);
-	void setSelectedPlayerId(int);
-	int getSelectedPlayerId();
-
-	// getters
-	sf::Sprite& getBgSprite();
-	sf::Font& getFont();
-	std::map<std::string, sf::Texture>& getTextures();
-	bool getActiveStatus();
-	int selectedPlayerId = 1;
-	
-
-	// setters
-	void setBgSprite(const sf::Sprite&);
-	void setFont(const sf::Font&);
-	void setTextures(const std::map<std::string, sf::Texture>&);
-	void setTextureElement(const std::string&, const sf::Texture&);
-	
-
+    // Getters
+    sf::Sprite& getBgSprite();
+    sf::Font& getFont();
+    std::map<std::string, sf::Texture>& getTextures();
+    bool getActiveStatus();
+    void changeActiveStatus(bool act);
+    int selectedPlayerId = 1;
+    void setSelectedPlayerId(int pl);
+    int getSelectedPlayerId();
 
 private:
-	sf::Sprite bgSprite;
-	sf::Font font;
-	std::map<std::string, sf::Texture> textures;
-	bool active = 0;
+    sf::Sprite bgSprite;
+    sf::Font font;
+    std::map<std::string, sf::Texture> textures;
+    bool active = false;
 
+    
 };
-
-
 
 #endif

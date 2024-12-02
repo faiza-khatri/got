@@ -1,13 +1,9 @@
 #include "baseWindow.h"
-
-#include <filesystem>
 #include <iostream>
+#include <filesystem>
 
-void BaseWindow::loadTextures(std::string& folderPath) {
-
-    /*std::string folderPath = "D:\\oop\\clonedTemplateOOP\\pngImages\\characterIntroPortraits";*/
-    /*for (int j = 0; j < 2; j++)
-    {*/
+// Function to load textures from a specified directory
+void BaseWindow::loadTextures( std::string& folderPath) {
     int i = 0;
     try {
         for (const auto& entry : std::filesystem::directory_iterator(folderPath)) {
@@ -28,13 +24,12 @@ void BaseWindow::loadTextures(std::string& folderPath) {
     }
 }
 
-
-
-sf::Texture& BaseWindow::getTextures(std::string& fileName) {
-    return textures[fileName];
+// Getter function to retrieve a texture by filename
+sf::Texture& BaseWindow::getTextures(const std::string& fileName) {
+    return textures[fileName]; // Returns the texture by filename from the map
 }
 
-// setters
+// Setter functions
 void BaseWindow::setBgSprite(const sf::Sprite& newBgSprite) {
     bgSprite = newBgSprite;
 }
@@ -51,7 +46,7 @@ void BaseWindow::setTextureElement(const std::string& fileName, const sf::Textur
     textures[fileName] = texture;
 }
 
-// getters
+// Getter functions
 sf::Sprite& BaseWindow::getBgSprite() {
     return bgSprite;
 }
@@ -75,6 +70,7 @@ void BaseWindow::changeActiveStatus(bool act) {
 void BaseWindow::setSelectedPlayerId(int pl) {
     selectedPlayerId = pl;
 }
+
 int BaseWindow::getSelectedPlayerId() {
     return selectedPlayerId;
 }
