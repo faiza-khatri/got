@@ -103,17 +103,17 @@ int Enemy::changeState(sf::Vector2f& playerPos, Character* player) {
 		}
 	}
 	/*else {*/
-		int randMove = (rand() % 3) - 1;
-		std::cout << "i want to move: " << randMove << std::endl;
-		if (randMove == -1 || randMove == 1) {
-			move(randMove, player);
-			if (getState() != 2) {
-				setCurrentFrame(0);
-				setCharTexture(getCharVar()[getSelectedCharacter()][3]); // walk
-				getSprite().setTexture(getCharTexture());
-				setState(2); // walk
-			}
-		}
+		//int randMove = (rand() % 3) - 1;
+		//std::cout << "i want to move: " << randMove << std::endl;
+		//if (randMove == -1 || randMove == 1) {
+		//	move(randMove, player);
+		//	if (getState() != 2) {
+		//		setCurrentFrame(0);
+		//		setCharTexture(getCharVar()[getSelectedCharacter()][3]); // walk
+		//		getSprite().setTexture(getCharTexture());
+		//		setState(2); // walk
+		//	}
+		//}
 	/*}*/
 	return 0;
 
