@@ -5,7 +5,7 @@
 #include <SFML/Window/Keyboard.hpp> 
 
 
-Player::Player(int hlth, int spd, int attackPwr, std::string nm, int pl) {
+Player::Player(int hlth, int spd, int attackPwr, std::string nm, int pl, int num) {
 	std::cout << "i called this constrcutor ..." << std::endl;
 	sf::Sprite player;
 
@@ -42,30 +42,26 @@ Player::Player(int hlth, int spd, int attackPwr, std::string nm, int pl) {
 	int numFrames;
 	player.setOrigin({ player.getLocalBounds().width / 2.0f, player.getLocalBounds().height });
 
-	if (chrPlayer == "jonsnow") {
-		frameWidth = 96;
-		frameHeight = 84;
-		player.setScale(8.0f, 8.0f);
 
-	}
-	else if (chrPlayer == "brienne") {
-		frameWidth = 128;
-		frameHeight = 128;
-		player.setScale(2.0f, 2.0f);
-	}
-	else {
-		frameWidth = 128;
-		frameHeight = 128;
-		player.setScale(2.0f, 2.0f);
-	}
+	frameWidth = 128;
+	frameHeight = 128;
+
+	
+
+	player.setScale(2.0f, 2.0f);
 
 	player.setTextureRect(sf::IntRect(0, 0, frameWidth, frameHeight));
 
 
-	player.setPosition(60.0f, 300.0f);
+	
 	setFacingRight(1);
 
-
+	if (num) {
+		player.setPosition(600.0f, 300.0f);
+	}
+	else {
+		player.setPosition(60.0f, 300.0f);
+	}
 
 	setSprite(player);
 
@@ -78,9 +74,17 @@ Player::Player(int hlth, int spd, int attackPwr, std::string nm, int pl) {
 }
 
 
-int Player::changeState(sf::Vector2f&, Character* enemy) {
+int Player::changeState(sf::Vector2f&, Character* enemy, 
+	sf::Keyboard::Key attack1Key,
+	sf::Keyboard::Key attack2Key,
+	sf::Keyboard::Key attack3Key,
+	sf::Keyboard::Key defendKey,
+	sf::Keyboard::Key turnLeftKey,
+	sf::Keyboard::Key turnRightKey,
+	sf::Keyboard::Key moveLeftKey,
+	sf::Keyboard::Key moveRightKey) {
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
+	if (sf::Keyboard::isKeyPressed(attack1Key)) {
 		if (getState() != 1) {
 			setCurrentFrame(0);
 			setCharTexture(getCharVar()[getSelectedCharacter()][0]);
@@ -88,7 +92,23 @@ int Player::changeState(sf::Vector2f&, Character* enemy) {
 			setState(1);
 		}
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+	else if (sf::Keyboard::isKeyPressed(attack2Key)) {
+		if (getState() != 4) {
+			setCurrentFrame(0);
+			setCharTexture(getCharVar()[getSelectedCharacter()][5]);
+			getSprite().setTexture(getCharTexture());
+			setState(4);
+		}
+	}
+	else if (sf::Keyboard::isKeyPressed(attack3Key)) {
+		if (getState() != 5) {
+			setCurrentFrame(0);
+			setCharTexture(getCharVar()[getSelectedCharacter()][6]);
+			getSprite().setTexture(getCharTexture());
+			setState(5);
+		}
+	}
+	else if (sf::Keyboard::isKeyPressed(defendKey)) {
 		if (getState() != -1) {
 			setCurrentFrame(0);
 			setCharTexture(getCharVar()[getSelectedCharacter()][1]);
@@ -97,7 +117,7 @@ int Player::changeState(sf::Vector2f&, Character* enemy) {
 		}
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+	if (sf::Keyboard::isKeyPressed(moveRightKey)) {
 
 		move(1, enemy);
 		if (getState() != 2) {
@@ -107,7 +127,7 @@ int Player::changeState(sf::Vector2f&, Character* enemy) {
 			setState(2);
 		}
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+	else if (sf::Keyboard::isKeyPressed(moveLeftKey)) {
 		move(-1, enemy);
 		if (getState() != 2) {
 			setCurrentFrame(0);
@@ -117,12 +137,12 @@ int Player::changeState(sf::Vector2f&, Character* enemy) {
 		}
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+	if (sf::Keyboard::isKeyPressed(turnRightKey)) {
 		if (!isFacingRight()) {
 			changeDirection();
 		}
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
+	else if (sf::Keyboard::isKeyPressed(turnLeftKey)) {
 		if (isFacingRight()) {
 			changeDirection();
 		}

@@ -6,10 +6,10 @@
 void Character::loadCharVarTextures(std::string& folderPath) {
 	
 	try {
-		std::map<std::string, std::array<sf::Texture, 5>> map;
+		std::map<std::string, std::array<sf::Texture, 8>> map;
 
 		for (const auto& entry : std::filesystem::directory_iterator(folderPath)) {
-			std::array<sf::Texture, 5> arr;
+			std::array<sf::Texture, 8> arr;
 			int i = 0;
 			for (const auto& subEntry : std::filesystem::directory_iterator(entry.path())) {
 				sf::Texture t;
@@ -35,61 +35,11 @@ void Character::loadCharVarTextures(std::string& folderPath) {
 }
 
 
-void Character::animate(bool flip, std::string& charAnimated) {
-	float frameDuration = 0.1f;
-	int idx = 2;
-	if (state == 1) {
-		idx = 0;
-	}
-	else if (state == -1) {
-		idx = 1;
-	}
-	else if (state == 2) {
-		idx = 3;
-	}
-	else if (state == 3) {
-		idx = 4;
-	}
+void Character::animate(bool flip, std::string& charAnimated, int numFrames, int idx) {
+	float frameDuration = 0.15f;
 	
-
-	int frameWidth, frameHeight, numFrames = 2;
-	frameHeight = 128;
-	frameWidth = 128;
-
-	if (charAnimated == "jonsnow" || charAnimated=="brienne" || charAnimated == "danaerys") {
-		if (state==0) {
-			numFrames = 6;
-		}
-		else if (state==-1) {
-			numFrames = 2;
-		}
-		else if(state == 1){
-			numFrames = 6;
-		}
-		else if (state == 2) {
-			numFrames = 8;
-		}
-		else if (state == 3) {
-			if (selectedCharacter == "brienne") {
-				numFrames = 3;
-			}
-			else {
-				numFrames = 2;
-			}
-		}
-	}
-	else  {
-	
-		if (state == 0) {
-			numFrames = 11;
-		}
-		else if (state == 1) {
-			numFrames = 6;
-		}
-		else {
-			numFrames = 2;
-		} 
-	}
+	int frameHeight = 128;
+	int frameWidth = 128;
 
 	elapsedTime += animationClock.restart().asSeconds();
 
@@ -112,8 +62,6 @@ void Character::animate(bool flip, std::string& charAnimated) {
 		
 	}
 
-	
-	////////////////////////to be updated when enemy added
 
 }
 
@@ -241,10 +189,10 @@ void Character::setAnimationClock(sf::Clock& clk) {
 	animationClock = clk;
 }
 
-void Character::setCharVar(std::map<std::string, std::array<sf::Texture, 5>>& map) {
+void Character::setCharVar(std::map<std::string, std::array<sf::Texture, 8>>& map) {
 	charVars = map;
 }
-std::map<std::string, std::array<sf::Texture, 5>>& Character::getCharVar() {
+std::map<std::string, std::array<sf::Texture, 8>>& Character::getCharVar() {
 	return charVars;
 }
 

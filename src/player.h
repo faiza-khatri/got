@@ -7,12 +7,16 @@
 
 class Player : public Character {
 public:
-	Player(int hlth, int spd, int attackPwr, std::string nme, int pl);
+	Player(int hlth, int spd, int attackPwr, std::string nme, int pl, int num);
 
 	/*void attack() override;
 	void defend() override;*/
 	/*void loadCharVarTextures() override;*/
-	int changeState(sf::Vector2f&, Character*) override;
+	int changeState(sf::Vector2f&, Character*, 
+		sf::Keyboard::Key, sf::Keyboard::Key,
+		sf::Keyboard::Key, sf::Keyboard::Key,
+		sf::Keyboard::Key, sf::Keyboard::Key,
+		sf::Keyboard::Key, sf::Keyboard::Key);
 };
 
 

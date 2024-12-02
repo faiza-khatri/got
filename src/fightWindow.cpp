@@ -1,10 +1,11 @@
 #include "fightWindow.h"
+#include <SFML/Window/Keyboard.hpp> 
 
 FightWindow::FightWindow(sf::Vector2u& windowSize, int pl) {
-    p1 = new Player(100, 10, 20, "danaerys", pl);
+    p1 = new Player(100, 10, 20, "danaerys", pl, 0);
 
     changeActiveStatus(0);
-    enemy = new Enemy(100, 10, 20, "white", 0);
+    p2 = new Player(100, 10, 20, "danaerys", pl, 1);
 
     lifeBar.setSize(sf::Vector2f(200, 20));
     lifeBar.setFillColor(sf::Color::Green);
@@ -45,17 +46,50 @@ void FightWindow::initializeComponents(sf::Vector2u&, int playerSelected) {
         s = "danaerys";
     }
     p1->setSelectedCharacter(s);
+    p2->setSelectedCharacter(s);
     p1->changeDirection();
     p1->changeDirection();
-    enemy->changeDirection();
+    p2->changeDirection();
+}
+
+void FightWindow::animateByState(Character* pl) {
+    std::string character = pl->getSelectedCharacter();
+    switch (pl->getState()) {
+    case -1:
+        pl->animate(false, character, character == "jonsnow" ? 4 : 2, 1); // defend
+        break;
+    case 0:
+        pl->animate(false, character, 6, 2); // idle
+        break;
+    case 1:
+        pl->animate(false, character, 6, 1); // attack
+        break;
+    case 2:
+        pl->animate(false, character, 8, 3); // walk
+        break;
+    case 3:
+        pl->animate(false, character, character == "brienne" ? 3 : 2, 4); // hurt
+        break;
+    case 4:
+        pl->animate(false, character, character == "danaerys" ? 4 : 3, 5); // attack2
+        break;
+    case 5:
+        pl->animate(false, character, character == "danaerys" ? 3 : 4, 6); // attack2
+        break;
+    }
 }
 
 void FightWindow::renderScreen(sf::RenderWindow& window) {
-    p1->animate(false, p1->getSelectedCharacter());
-    enemy->animate(false, enemy->getSelectedCharacter());
+
+    animateByState(p1);
+    
+    animateByState(p2);
+
+    ////p1->animate(false, p1->getSelectedCharacter());
+    //enemy->animate(false, enemy->getSelectedCharacter());
 
     window.draw(p1->getSprite());
-    window.draw(enemy->getSprite());
+    window.draw(p2->getSprite());
 
     window.draw(lifeBarOutline);
     window.draw(lifeBar);
@@ -68,8 +102,12 @@ int FightWindow::handleInput(sf::RenderWindow&) {
     sf::Vector2f playerCenter = sf::Vector2f(playerBounds.left + playerBounds.width / 2,
         playerBounds.top + playerBounds.height / 2);
 
-    int damagePl = p1->changeState(p1->getPosition(), enemy);
-    int damageEn = enemy->changeState(playerCenter, p1);
+    int damagePl = p1->changeState(p1->getPosition(), p2, 
+        sf::Keyboard::Q, sf::Keyboard::W, sf::Keyboard::E, sf::Keyboard::R,
+        sf::Keyboard::S, sf::Keyboard::F, sf::Keyboard::A, sf::Keyboard::D);
+    int damageEn = p2->changeState(p1->getPosition(), p1,
+        sf::Keyboard::I, sf::Keyboard::O, sf::Keyboard::P, sf::Keyboard::L,
+        sf::Keyboard::Up, sf::Keyboard::Down, sf::Keyboard::Left, sf::Keyboard::Right);
 
     if (damagePl) {
         updateLifeBar(10.0f, lifeBar, playerCurrentWidth);
@@ -81,7 +119,7 @@ int FightWindow::handleInput(sf::RenderWindow&) {
     if (p1->getHealth() <= 0) {
         return 1;
     }
-    if (enemy->getHealth() <= 0) {
+    if (p2->getHealth() <= 0) {
         return 2; 
     }
 
@@ -116,10 +154,10 @@ void FightWindow::updateLifeBar(float damage, sf::RectangleShape& bar, float& cu
 
 void FightWindow::operator=(const FightWindow* other) {
     p1 = other->p1;
-    enemy = other->enemy;
+    p2 = other->p2;
 }
 
 FightWindow::~FightWindow() {
     delete p1;
-    delete enemy;
+    delete p2;
 }

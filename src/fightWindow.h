@@ -31,10 +31,11 @@ public:
     void updateLifeBar(float damage, sf::RectangleShape& bar, float& currentWidth);
     sf::RectangleShape lifeBarOutline;
     sf::RectangleShape enemyLifeBarOutline;
+    void animateByState(Character*);
 private:
     Player* p1;
-    //Player* p2;
-    Enemy* enemy;
+    Player* p2;
+   /* Enemy* enemy;*/
     float playerCurrentWidth; 
     float enemyCurrentWidth;
     sf::RectangleShape lifeBar;                           
