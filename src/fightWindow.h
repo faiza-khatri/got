@@ -15,10 +15,8 @@
 
 #include "player.h"
 #include "enemy.h"
-//#include "game.h"
 
 
-// character selection window and other initial operations
 class FightWindow : public BaseWindow, public sf::RenderWindow {
 public:
     /*FightWindow();*/
