@@ -7,13 +7,12 @@
 
 class Player : public Character {
 public:
-	Player();
 	Player(int hlth, int spd, int attackPwr, std::string nme, int pl);
 
 	/*void attack() override;
 	void defend() override;*/
 	/*void loadCharVarTextures() override;*/
-	void changeState() override;
+	int changeState(sf::Vector2f&, Character*) override;
 };
 
 

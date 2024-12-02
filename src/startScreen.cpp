@@ -40,7 +40,7 @@ void StartScreen::initializeComponents(sf::Vector2u& windowSize, int playerSelec
     float cbButtonX = (windowSize.x / 2.0f) - (cbButtonWidth / 2.0f);
     float cbButtonY = buttonY + buttonHeight + (windowSize.y * 0.05f);
     changeBgButton.setPosition(cbButtonX, cbButtonY);
-    
+
     std::string soundPath = std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\sounds\\";
 
 
@@ -60,21 +60,14 @@ void StartScreen::initializeComponents(sf::Vector2u& windowSize, int playerSelec
 int StartScreen::handleInput(sf::RenderWindow& wind) {
     sf::Vector2i mousePos = sf::Mouse::getPosition(wind);
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-        clickSound.play(); 
+        clickSound.play();
         if (playButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
             return 1;
         }
         else if (exitButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
-            /*if (game.getCurrentState() != -1) {
-                backgroundMusic.stop(); 
-            }
-        } else if (exitButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
-            if (game.getCurrentState() != -1) {
-                game.setCurrentState(-1);
-                wind.close();
-            }*/
+            backgroundMusic.stop();
+            wind.close();
         }
-        ////////////// ADD HERE THE LOGIC OF CHANGE BACKGROUND THE STATE CHANGES TO 2 /////////////////////////
     }
     return 0;
 }
@@ -94,5 +87,3 @@ void StartScreen::operator=(const StartScreen* other) {
     changeBgButton = other->changeBgButton;
     spriteList = other->spriteList;
 }
-
-

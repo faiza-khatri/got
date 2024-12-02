@@ -1,15 +1,16 @@
+
 #include "game.h"
 
 void Game::setCurrentState(int state) {
-	/*currentState = state;*/
+	currentState = state;
 }
 
-int Game::getCurrentState() const{
+int Game::getCurrentState() {
 	return currentState;
 }
 
 
-int Game::getPlayerSelected()const {
+int Game::getPlayerSelected() {
 	return playerSelected;
 }
 
@@ -40,14 +41,30 @@ void Game::intializeComponents(sf::Vector2u& windowSize) {
 
 void Game::handleInput(sf::RenderWindow& window) {
 	sf::Vector2u windowSize = window.getSize();
-	if (currentScreen->handleInput(window) == 1) {
+	int trans = currentScreen->handleInput(window);
+	if (trans) {
 		if (currentState == 1) {
 			playerSelected = currentScreen->getSelectedPlayerId();
-			/*std::cout << "selected player id from actual game: " << currentScreen->getSelectedPlayerId() << std::endl;*/
 			screens.push_back(new FightWindow(windowSize, playerSelected));
 		}
 		else if (currentState == 0) {
 			screens.push_back(new CharacterSelectWindow(windowSize));
+		}
+		else if (currentState == 2) {
+			if (trans == 1) {
+				screens.push_back(new EndScreen(windowSize, 0));
+			}
+			else if (trans == 2) {
+				screens.push_back(new EndScreen(windowSize, 1));
+			}
+		}
+		else if (currentState == 3) {
+			for (BaseWindow* temp : screens) {
+				delete temp;
+			};
+			screens.clear();
+			screens.push_back(new StartScreen(windowSize));
+			currentState = -1;
 		}
 		currentState += 1;
 		currentScreen = screens[currentState];

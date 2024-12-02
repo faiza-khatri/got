@@ -2,14 +2,15 @@
 #define GAME
 
 #include <string>
-#include "GameOverWindow.h"
+
 #include "startScreen.h"
 #include "characterSelectWindow.h"
 #include "fightWindow.h"
+#include "gameEndScreen.h"
 
 class Game {
 private:
-	 int currentState;
+	int currentState;
 	/*sf::RenderWindow& window;*/
 	int playerSelected;
 	/*StartScreen* startScreen;
@@ -21,10 +22,10 @@ private:
 
 public:
 	Game(sf::Vector2u&);
-	static void setCurrentState(int);
-	int getCurrentState()const;
+	void setCurrentState(int);
+	int getCurrentState();
 	void setPlayerSelected(int);
-	int getPlayerSelected()const;
+	int getPlayerSelected();
 	void setCurrentScreen(BaseWindow*);
 	BaseWindow* getCurrentScreen();
 

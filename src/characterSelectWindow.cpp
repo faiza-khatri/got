@@ -7,7 +7,7 @@
 
 
 CharacterSelectWindow::CharacterSelectWindow(sf::Vector2u& windowSize) {
-    
+
 
     // populate textures map
     loadTextures(std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\characterIntroPortraits");
@@ -15,19 +15,19 @@ CharacterSelectWindow::CharacterSelectWindow(sf::Vector2u& windowSize) {
 
     // populates characterlist
    /* initializeComponents(windowSize);*/
-   std::string clickSoundPath = std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\sounds\\click.wav";
+    std::string clickSoundPath = std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\sounds\\click.wav";
     if (!clickBuffer.loadFromFile(clickSoundPath)) {
         std::cerr << "Error: Unable to load click sound!" << std::endl;
     }
     clickSound.setBuffer(clickBuffer);
 
     // set as active by default
-    changeActiveStatus(0); 
+    changeActiveStatus(0);
     INTRO_WIDTH = 180;
     INTRO_HEIGHT = 300;
     PORTRAIT_WIDTH = 80;
     PORTRAIT_HEIGHT = 100;
-    
+
 }
 
 void CharacterSelectWindow::initializeComponents(sf::Vector2u&, int playerSelected) {
@@ -74,7 +74,7 @@ void CharacterSelectWindow::initializeComponents(sf::Vector2u&, int playerSelect
         selectButtonSprite.setPosition(600, 400);
     }
 
-    
+
     characterDetailsText.setFont(getFont());
     characterDetailsText.setCharacterSize(20);
     characterDetailsText.setFillColor(sf::Color::White);
@@ -89,12 +89,12 @@ void CharacterSelectWindow::initializeComponents(sf::Vector2u&, int playerSelect
 void CharacterSelectWindow::renderScreen(sf::RenderWindow& wind) {
     wind.clear(sf::Color::Black);
 
-    const int portraitsPerRow = 5;  
-    const float marginX = 20.0f;   
-    const float marginY = 20.0f;   
-    const float startX = 100.0f;    
-    const float startY = 50.0f;     
-   
+    const int portraitsPerRow = 5;
+    const float marginX = 20.0f;
+    const float marginY = 20.0f;
+    const float startX = 100.0f;
+    const float startY = 50.0f;
+
     for (auto& [characterIntroId, sprite] : characterList) {
         int row = characterIntroId / portraitsPerRow;
         int col = characterIntroId % portraitsPerRow;
@@ -135,7 +135,7 @@ int CharacterSelectWindow::handleInput(sf::RenderWindow& wind) {
         for (auto& [characterId, sprite] : characterList) {
             if (sprite.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
                 setSelectedPlayerId(characterId);
-                std::cout << "character id" << characterId << std::endl;
+                std::cout << "character id " << getSelectedPlayerId() << std::endl;
                 selectedCharacterSprite = character[characterId];
                 isCharacterSelected = true;
 
