@@ -8,7 +8,7 @@
 Player::Player(int hlth, int spd, int attackPwr, std::string nm, int pl) {
 	std::cout << "i called this constrcutor ..." << std::endl;
 	sf::Sprite player;
-	
+
 
 	setState(0); // defaut is idle
 	setHealth(hlth);
@@ -26,7 +26,7 @@ Player::Player(int hlth, int spd, int attackPwr, std::string nm, int pl) {
 	else if (pl == 1) {
 		s = "danaerys";
 	}
-	
+
 	setSelectedCharacter(s);
 	setCurrentFrame(0);
 	std::string folderPath = std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\player";
@@ -65,7 +65,6 @@ Player::Player(int hlth, int spd, int attackPwr, std::string nm, int pl) {
 	player.setPosition(60.0f, 300.0f);
 	setFacingRight(1);
 
-	
 
 
 	setSprite(player);
@@ -97,7 +96,9 @@ int Player::changeState(sf::Vector2f&, Character* enemy) {
 			setState(-1);
 		}
 	}
+
 	 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+
 		move(1, enemy);
 		if (getState() != 2) {
 			setCurrentFrame(0);
@@ -124,6 +125,21 @@ int Player::changeState(sf::Vector2f&, Character* enemy) {
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)) {
 		if (isFacingRight()) {
 			changeDirection();
+
+	float distance = getSprite().getPosition().x - enemy->getSprite().getPosition().x;
+
+	if (abs(distance) < 180.0f) {
+		if (getState() != -1 && getState() != 1 && enemy->getState() == 1) {
+			setHealth(getHealth() - 5);
+			std::cout << "health of player: " << getHealth() << std::endl;
+			if (getState() != 3) {
+				setCurrentFrame(0);
+				setCharTexture(getCharVar()[getSelectedCharacter()][4]);
+				getSprite().setTexture(getCharTexture());
+				setState(3);
+			}
+			return 1;
+
 		}
 	}
 

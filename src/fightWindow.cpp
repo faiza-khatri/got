@@ -35,7 +35,6 @@ void FightWindow::initializeComponents(sf::Vector2u&, int playerSelected) {
 	p1->changeDirection();
 	enemy->changeDirection();
 
-	
 }
 void FightWindow::renderScreen(sf::RenderWindow& window) {
 	p1->animate(false, p1->getSelectedCharacter());
@@ -48,6 +47,7 @@ void FightWindow::renderScreen(sf::RenderWindow& window) {
 int FightWindow::handleInput(sf::RenderWindow&) {
 
 	sf::FloatRect playerBounds = p1->getSprite().getGlobalBounds();
+
 	sf::Vector2f playerCenter = sf::Vector2f(playerBounds.left + playerBounds.width / 2, 
 		playerBounds.top + playerBounds.height / 2);
 	int damagePl = p1->changeState(p1->getPosition(), enemy);
@@ -71,9 +71,9 @@ void FightWindow::updateLifeBar(float damage) {
 	float maxWidth = 200.0f;
 
 	sf::Time elapsedTime = clock.getElapsedTime();
-	if (elapsedTime.asSeconds() > 0.001f) {  // Update every (0.001s)
+	if (elapsedTime.asSeconds() > 0.001f) {  
 		if (currentWidth > 0.0f) {
-			currentWidth -= damage;  // decrease the width by the damage value
+			currentWidth -= damage;  
 			if (currentWidth < 0.0f) {
 				currentWidth = 0.0f;
 			}
@@ -82,10 +82,10 @@ void FightWindow::updateLifeBar(float damage) {
 		clock.restart();
 	}
 
-	// Update the life bar's size
+
 	lifeBar.setSize(sf::Vector2f(currentWidth, 20));
 
-	// color based on width percentage
+
 	float percentage = currentWidth / maxWidth;
 	if (percentage > 0.5f) {
 		lifeBar.setFillColor(sf::Color::Green);
@@ -107,3 +107,4 @@ FightWindow::~FightWindow() {
 	delete p1;
 	delete enemy;
 }
+

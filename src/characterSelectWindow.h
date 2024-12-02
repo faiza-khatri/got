@@ -37,16 +37,16 @@ public:
 
 
 	// Handle mouse and keyboard input
-	int handleInput(sf::RenderWindow&) override; 
+	int handleInput(sf::RenderWindow&) override;
 
 
- 
-    sf::Sprite selectButtonSprite;           
-    sf::Texture selectButtonTexture;         
 
-    sf::SoundBuffer clickBuffer;             // click sound
-    sf::Sound clickSound;                    // Click sound
-        
+	sf::Sprite selectButtonSprite;
+	sf::Texture selectButtonTexture;
+
+	sf::SoundBuffer clickBuffer;             // click sound
+	sf::Sound clickSound;                    // Click sound
+
 };
 
 #endif 
