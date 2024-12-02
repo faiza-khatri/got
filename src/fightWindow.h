@@ -41,6 +41,8 @@ private:
     sf::RectangleShape lifeBar;                           
     sf::RectangleShape enemyLifeBar;
     sf::Clock clock;
+    sf::Sprite controls;
+    sf::Texture controlTexture;;
 
 };
 

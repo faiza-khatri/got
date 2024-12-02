@@ -1,6 +1,8 @@
 #include "fightWindow.h"
 #include <SFML/Window/Keyboard.hpp> 
 
+#include <filesystem>
+
 FightWindow::FightWindow(sf::Vector2u& windowSize, int pl, int pl2) {
     p1 = new Player(100, 10, 20, "danaerys", pl, 0);
 
@@ -33,10 +35,28 @@ FightWindow::FightWindow(sf::Vector2u& windowSize, int pl, int pl2) {
     playerCurrentWidth = 200.0f;
     enemyCurrentWidth = 200.0f;
 
+    controls = sf::Sprite();
+
+    
+    std::string path = std::filesystem::current_path().parent_path().parent_path().parent_path().parent_path().string() + "\\pngImages\\Controls.png";
+    if (!controlTexture.loadFromFile(path)) {
+        std::cerr << "Error: Unable to load controls!" << std::endl;
+    }
+    else {
+        std::cout << "loaded cntrols png successfully" << std::endl;
+        controls.setTexture(controlTexture);
+        controls.setScale(2.0f, 2.0f);
+        controls.setPosition(0.0f, -340.0f);
+        controls.setScale(static_cast<float>(windowSize.x) / ( controlTexture.getSize().x), static_cast<float>(windowSize.y) / ( controlTexture.getSize().y));
+    }
+    
+    
+
     clock.restart();
 }
 
 void FightWindow::initializeComponents(sf::Vector2u&, int playerSelected, int playerSelected2) {
+    
     setSelectedPlayerId1(playerSelected);
     setSelectedPlayerId2(playerSelected2);
     std::string s = "brienne";
@@ -93,7 +113,9 @@ void FightWindow::animateByState(Character* pl) {
 }
 
 void FightWindow::renderScreen(sf::RenderWindow& window) {
+    
     window.draw(getBgSprite());
+    
 
     animateByState(p1);
     
@@ -109,6 +131,7 @@ void FightWindow::renderScreen(sf::RenderWindow& window) {
     window.draw(lifeBar);
     window.draw(enemyLifeBarOutline);
     window.draw(enemyLifeBar);
+    window.draw(controls);
 }
 
 int FightWindow::handleInput(sf::RenderWindow&) {
@@ -143,7 +166,6 @@ int FightWindow::handleInput(sf::RenderWindow&) {
         
     }
 
-   
 
     if (!p1->isAlive()) {
         return 1;
